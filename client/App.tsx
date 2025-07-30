@@ -63,33 +63,36 @@ function registerServiceWorker() {
 function AppWithPWA() {
   useEffect(() => {
     registerServiceWorker();
+    initializePerformanceOptimizations();
   }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
-      <UserProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/analytics" element={<Analytics />} />
-              <Route path="/sanctum-map" element={<SanctumMap />} />
-              <Route path="/library" element={<Library />} />
-              <Route path="/dignity-coin" element={<DignityCoin />} />
-              <Route path="/fellowship" element={<Fellowship />} />
-              <Route
-                path="/pain-transmutation"
-                element={<PainTransmutation />}
-              />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-      </UserProvider>
+      <SecurityProvider>
+        <UserProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/analytics" element={<Analytics />} />
+                <Route path="/sanctum-map" element={<SanctumMap />} />
+                <Route path="/library" element={<Library />} />
+                <Route path="/dignity-coin" element={<DignityCoin />} />
+                <Route path="/fellowship" element={<Fellowship />} />
+                <Route
+                  path="/pain-transmutation"
+                  element={<PainTransmutation />}
+                />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </TooltipProvider>
+        </UserProvider>
+      </SecurityProvider>
     </QueryClientProvider>
   );
 }
