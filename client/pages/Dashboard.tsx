@@ -222,8 +222,18 @@ function RecentActivity() {
       <CardContent className="space-y-4">
         {activities.map((activity, index) => (
           <div key={index} className="flex items-center gap-4 p-3 rounded-lg bg-muted/30">
-            <div className={`w-10 h-10 rounded-full bg-${activity.color}/20 flex items-center justify-center`}>
-              <activity.icon className={`w-5 h-5 text-${activity.color}`} />
+            <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+              activity.color === 'atlas-gold' ? 'bg-atlas-gold/20' :
+              activity.color === 'atlas-cosmic' ? 'bg-atlas-cosmic/20' :
+              activity.color === 'atlas-regenerative' ? 'bg-atlas-regenerative/20' :
+              'bg-atlas-wisdom/20'
+            }`}>
+              <activity.icon className={`w-5 h-5 ${
+                activity.color === 'atlas-gold' ? 'text-atlas-gold' :
+                activity.color === 'atlas-cosmic' ? 'text-atlas-cosmic' :
+                activity.color === 'atlas-regenerative' ? 'text-atlas-regenerative' :
+                'text-atlas-wisdom'
+              }`} />
             </div>
             <div className="flex-1">
               <p className="text-foreground font-medium">{activity.title}</p>
