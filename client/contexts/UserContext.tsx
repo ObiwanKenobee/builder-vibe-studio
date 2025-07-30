@@ -144,10 +144,14 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
   // Save user data to localStorage when state changes
   useEffect(() => {
-    if (state.user.isConnected) {
-      localStorage.setItem('atlas-user', JSON.stringify(state.user));
-    } else {
-      localStorage.removeItem('atlas-user');
+    try {
+      if (state.user.isConnected && state.user.address) {
+        localStorage.setItem('atlas-user', JSON.stringify(state.user));
+      } else {
+        localStorage.removeItem('atlas-user');
+      }
+    } catch (error) {
+      console.error('Error saving user data:', error);
     }
   }, [state.user]);
 
