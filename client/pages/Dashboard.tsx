@@ -103,8 +103,18 @@ function PersonaStats() {
         <Card key={stat.label} className="border-border">
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <div className={`w-10 h-10 rounded-lg bg-${config?.color}/20 flex items-center justify-center`}>
-                <stat.icon className={`w-5 h-5 text-${config?.color}`} />
+              <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                config?.color === 'atlas-gold' ? 'bg-atlas-gold/20' :
+                config?.color === 'atlas-cosmic' ? 'bg-atlas-cosmic/20' :
+                config?.color === 'atlas-regenerative' ? 'bg-atlas-regenerative/20' :
+                'bg-atlas-wisdom/20'
+              }`}>
+                <stat.icon className={`w-5 h-5 ${
+                  config?.color === 'atlas-gold' ? 'text-atlas-gold' :
+                  config?.color === 'atlas-cosmic' ? 'text-atlas-cosmic' :
+                  config?.color === 'atlas-regenerative' ? 'text-atlas-regenerative' :
+                  'text-atlas-wisdom'
+                }`} />
               </div>
               <div>
                 <p className="text-sm text-foreground/60">{stat.label}</p>
