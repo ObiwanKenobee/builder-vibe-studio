@@ -284,8 +284,8 @@ export default function FloatingBanner() {
   return (
     <>
       {/* Main Floating Banner */}
-      <div className={`fixed bottom-6 right-6 z-50 transition-all duration-500 ${
-        isExpanded ? 'w-96' : 'w-80'
+      <div className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 transition-all duration-500 ${
+        isExpanded ? 'w-full max-w-sm sm:w-96' : 'w-full max-w-xs sm:w-80'
       }`}>
         <Card className="bg-card/95 backdrop-blur-lg border-atlas-gold/30 shadow-2xl overflow-hidden">
           <CardContent className="p-0">
