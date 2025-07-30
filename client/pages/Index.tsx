@@ -102,6 +102,18 @@ function Navigation() {
 
 // Hero Section
 function HeroSection() {
+  const { state, dispatch } = useUser();
+
+  const handleEnterSanctum = () => {
+    if (state.user.isConnected && state.user.onboardingComplete) {
+      window.location.href = '/dashboard';
+    } else if (state.user.isConnected) {
+      dispatch({ type: 'SET_ONBOARDING', payload: true });
+    } else {
+      dispatch({ type: 'SET_WALLET_MODAL', payload: true });
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* WebGL Background */}
@@ -138,13 +150,20 @@ function HeroSection() {
         </h1>
 
         <p className="text-xl md:text-2xl text-foreground/80 mb-12 max-w-3xl mx-auto leading-relaxed">
-          Welcome to Atlas Sanctum, where financial empires transform into forces of planetary healing. 
-          Experience the future of regenerative finance through immersive storytelling and ethical analytics.
+          {state.user.isConnected && state.user.onboardingComplete ? (
+            `Welcome back, ${state.user.persona ? state.user.persona.charAt(0).toUpperCase() + state.user.persona.slice(1) : 'Guardian'}. Your regenerative journey continues.`
+          ) : (
+            'Welcome to Atlas Sanctum, where financial empires transform into forces of planetary healing. Experience the future of regenerative finance through immersive storytelling and ethical analytics.'
+          )}
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-          <Button size="lg" className="bg-atlas-gold hover:bg-atlas-gold/90 text-atlas-deep font-semibold text-lg px-8 py-4 group">
-            Enter Sanctum
+          <Button
+            size="lg"
+            onClick={handleEnterSanctum}
+            className="bg-atlas-gold hover:bg-atlas-gold/90 text-atlas-deep font-semibold text-lg px-8 py-4 group"
+          >
+            {state.user.isConnected && state.user.onboardingComplete ? 'Continue Journey' : 'Enter Sanctum'}
             <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </Button>
           <Button size="lg" variant="outline" className="border-atlas-cosmic text-atlas-cosmic hover:bg-atlas-cosmic/10 text-lg px-8 py-4">
