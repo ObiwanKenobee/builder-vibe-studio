@@ -310,27 +310,57 @@ function FeaturesSection() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
-            <article
+            <Link
               key={index}
-              className="group relative p-8 rounded-2xl bg-card border border-border hover:border-atlas-gold/50 transition-all duration-300 hover:shadow-2xl hover:shadow-atlas-gold/20"
-              itemScope
-              itemType="https://schema.org/SoftwareApplication"
-              itemProp="itemListElement"
+              to={feature.path}
+              className="group relative block p-8 rounded-2xl bg-card border border-border hover:border-atlas-gold/50 transition-all duration-300 hover:shadow-2xl hover:shadow-atlas-gold/20 cursor-pointer transform hover:scale-[1.02]"
             >
-              <meta itemProp="position" content={String(index + 1)} />
-              <div
-                className={`w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform ${
-                  feature.color === "atlas-gold"
-                    ? "bg-atlas-gold/20"
-                    : feature.color === "atlas-cosmic"
-                      ? "bg-atlas-cosmic/20"
-                      : feature.color === "atlas-regenerative"
-                        ? "bg-atlas-regenerative/20"
-                        : "bg-atlas-wisdom/20"
-                }`}
+              <article
+                className="relative"
+                itemScope
+                itemType="https://schema.org/SoftwareApplication"
+                itemProp="itemListElement"
               >
-                <feature.icon
-                  className={`w-8 h-8 ${
+                <meta itemProp="position" content={String(index + 1)} />
+                <div
+                  className={`w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform ${
+                    feature.color === "atlas-gold"
+                      ? "bg-atlas-gold/20"
+                      : feature.color === "atlas-cosmic"
+                        ? "bg-atlas-cosmic/20"
+                        : feature.color === "atlas-regenerative"
+                          ? "bg-atlas-regenerative/20"
+                          : "bg-atlas-wisdom/20"
+                  }`}
+                >
+                  <feature.icon
+                    className={`w-8 h-8 ${
+                      feature.color === "atlas-gold"
+                        ? "text-atlas-gold"
+                        : feature.color === "atlas-cosmic"
+                          ? "text-atlas-cosmic"
+                          : feature.color === "atlas-regenerative"
+                            ? "text-atlas-regenerative"
+                            : "text-atlas-wisdom"
+                    }`}
+                  />
+                </div>
+                <h3
+                  className="text-xl font-semibold mb-4 text-foreground group-hover:text-atlas-gold transition-colors"
+                  itemProp="name"
+                >
+                  {feature.title}
+                </h3>
+                <p
+                  className="text-foreground/70 leading-relaxed mb-4"
+                  itemProp="description"
+                >
+                  {feature.description}
+                </p>
+
+                {/* Call-to-action indicator */}
+                <div className="flex items-center text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className={`${
                     feature.color === "atlas-gold"
                       ? "text-atlas-gold"
                       : feature.color === "atlas-cosmic"
@@ -338,26 +368,26 @@ function FeaturesSection() {
                         : feature.color === "atlas-regenerative"
                           ? "text-atlas-regenerative"
                           : "text-atlas-wisdom"
-                  }`}
-                />
-              </div>
-              <h3
-                className="text-xl font-semibold mb-4 text-foreground group-hover:text-atlas-gold transition-colors"
-                itemProp="name"
-              >
-                {feature.title}
-              </h3>
-              <p
-                className="text-foreground/70 leading-relaxed"
-                itemProp="description"
-              >
-                {feature.description}
-              </p>
-              <meta itemProp="keywords" content={feature.keywords} />
-              <script type="application/ld+json">
-                {JSON.stringify(feature.schema)}
-              </script>
-            </article>
+                  }`}>
+                    Explore Technology
+                  </span>
+                  <ArrowRight className={`w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform ${
+                    feature.color === "atlas-gold"
+                      ? "text-atlas-gold"
+                      : feature.color === "atlas-cosmic"
+                        ? "text-atlas-cosmic"
+                        : feature.color === "atlas-regenerative"
+                          ? "text-atlas-regenerative"
+                          : "text-atlas-wisdom"
+                  }`} />
+                </div>
+
+                <meta itemProp="keywords" content={feature.keywords} />
+                <script type="application/ld+json">
+                  {JSON.stringify(feature.schema)}
+                </script>
+              </article>
+            </Link>
           ))}
         </div>
       </div>
