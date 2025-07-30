@@ -186,55 +186,106 @@ function FeaturesSection() {
   const features = [
     {
       icon: Globe,
-      title: "Sanctum Map",
-      description: "3D interactive globe revealing financial empires and regeneration flows with real-time data overlays.",
-      color: "atlas-wisdom"
+      title: "Interactive Sanctum Map",
+      description: "Revolutionary 3D financial flow visualization revealing how capital moves through regenerative ecosystems. Track ethical investment impacts across planetary healing projects with real-time ESG analytics.",
+      color: "atlas-wisdom",
+      keywords: "financial flow map, ethical investment tracking, ESG analytics, impact investing dashboard",
+      schema: {
+        "@type": "SoftwareApplication",
+        "name": "Sanctum Map",
+        "description": "3D interactive globe for tracking regenerative financial flows",
+        "applicationCategory": "Finance",
+        "featureList": ["Real-time data visualization", "Impact tracking", "Geographic insights"]
+      }
     },
     {
       icon: Book,
-      title: "Library of Living Meaning",
-      description: "Curated wisdom texts with AI-powered semantic search and ethics-in-motion narratives.",
-      color: "atlas-cosmic"
+      title: "AI-Powered Wisdom Library",
+      description: "Global repository of regenerative finance wisdom with semantic search across cultures. Access curated texts, indigenous knowledge, and AI-generated ethics-in-motion narratives for conscious decision-making.",
+      color: "atlas-cosmic",
+      keywords: "wisdom library, AI semantic search, regenerative finance education, ethical decision making",
+      schema: {
+        "@type": "DigitalDocument",
+        "name": "Library of Living Meaning",
+        "description": "Curated wisdom texts for regenerative finance",
+        "genre": "Educational Resource"
+      }
     },
     {
       icon: Coins,
-      title: "Dignity Coin",
-      description: "Covenant-based investments linked to planetary healing metrics and SDG impact tracking.",
-      color: "atlas-gold"
+      title: "Dignity Coin Ecosystem",
+      description: "Breakthrough covenant-based cryptocurrency linking investments to measurable planetary healing outcomes. Track SDG impact scores, regenerative project funding, and transparent capital allocation.",
+      color: "atlas-gold",
+      keywords: "dignity coin, covenant investing, impact cryptocurrency, SDG tracking, regenerative funding",
+      schema: {
+        "@type": "Product",
+        "name": "Dignity Coin",
+        "description": "Covenant-based cryptocurrency for impact investing",
+        "category": "Cryptocurrency"
+      }
     },
     {
       icon: Zap,
-      title: "Pain Transmutation",
-      description: "Transform crisis into poetry, ritual, and music through our AI-powered meaning engine.",
-      color: "atlas-regenerative"
+      title: "Crisis Transformation AI",
+      description: "Proprietary AI engine converting personal and collective crises into healing poetry, sacred rituals, and regenerative music. Transform pain into purpose with our meaning-making algorithms.",
+      color: "atlas-regenerative",
+      keywords: "AI crisis transformation, pain to art, healing algorithms, regenerative storytelling",
+      schema: {
+        "@type": "SoftwareApplication",
+        "name": "Pain Transmutation Studio",
+        "description": "AI-powered platform for transforming crisis into healing art",
+        "applicationCategory": "Creativity"
+      }
     }
   ];
 
   return (
-    <section className="py-20 px-6">
+    <section className="py-20 px-6" itemScope itemType="https://schema.org/ItemList">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
-            Planetary-Scale Consciousness
+            Regenerative Finance Revolution: Four Breakthrough Technologies
           </h2>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
-            Four pillars of transformation connecting financial flows to regenerative outcomes
+            Connect ethical capital to planetary healing through AI-powered insights, interactive mapping,
+            and transparent impact tracking. The future of conscious investing starts here.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
-            <div key={index} className="group relative p-8 rounded-2xl bg-card border border-border hover:border-atlas-gold/50 transition-all duration-300 hover:shadow-2xl hover:shadow-atlas-gold/20">
-              <div className={`w-16 h-16 rounded-xl bg-${feature.color}/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                <feature.icon className={`w-8 h-8 text-${feature.color}`} />
+            <article
+              key={index}
+              className="group relative p-8 rounded-2xl bg-card border border-border hover:border-atlas-gold/50 transition-all duration-300 hover:shadow-2xl hover:shadow-atlas-gold/20"
+              itemScope
+              itemType="https://schema.org/SoftwareApplication"
+              itemProp="itemListElement"
+            >
+              <meta itemProp="position" content={String(index + 1)} />
+              <div className={`w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform ${
+                feature.color === 'atlas-gold' ? 'bg-atlas-gold/20' :
+                feature.color === 'atlas-cosmic' ? 'bg-atlas-cosmic/20' :
+                feature.color === 'atlas-regenerative' ? 'bg-atlas-regenerative/20' :
+                'bg-atlas-wisdom/20'
+              }`}>
+                <feature.icon className={`w-8 h-8 ${
+                  feature.color === 'atlas-gold' ? 'text-atlas-gold' :
+                  feature.color === 'atlas-cosmic' ? 'text-atlas-cosmic' :
+                  feature.color === 'atlas-regenerative' ? 'text-atlas-regenerative' :
+                  'text-atlas-wisdom'
+                }`} />
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-foreground group-hover:text-atlas-gold transition-colors">
+              <h3 className="text-xl font-semibold mb-4 text-foreground group-hover:text-atlas-gold transition-colors" itemProp="name">
                 {feature.title}
               </h3>
-              <p className="text-foreground/70 leading-relaxed">
+              <p className="text-foreground/70 leading-relaxed" itemProp="description">
                 {feature.description}
               </p>
-            </div>
+              <meta itemProp="keywords" content={feature.keywords} />
+              <script type="application/ld+json">
+                {JSON.stringify(feature.schema)}
+              </script>
+            </article>
           ))}
         </div>
       </div>
