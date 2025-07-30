@@ -89,6 +89,14 @@ const sidebarSections = [
       { id: "seo", name: "SEO/Acquisition", icon: Search },
     ],
   },
+  {
+    title: "System Management",
+    icon: Settings,
+    dashboards: [
+      { id: "system-monitoring", name: "System Monitoring", icon: Activity },
+      { id: "privacy-compliance", name: "Privacy & Compliance", icon: Shield },
+    ],
+  },
 ];
 
 // Sample data generators
