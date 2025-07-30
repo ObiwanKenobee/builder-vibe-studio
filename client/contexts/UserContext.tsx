@@ -113,11 +113,11 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
   // Load user data from localStorage on mount
   useEffect(() => {
-    const savedUser = localStorage.getItem('atlas-user');
-    if (savedUser) {
-      try {
+    try {
+      const savedUser = localStorage.getItem('atlas-user');
+      if (savedUser && savedUser !== 'undefined' && savedUser !== 'null') {
         const userData = JSON.parse(savedUser);
-        if (userData.address) {
+        if (userData && typeof userData === 'object' && userData.address) {
           dispatch({ type: 'CONNECT_WALLET', payload: { address: userData.address } });
           if (userData.persona) {
             dispatch({ type: 'SET_PERSONA', payload: userData.persona });
@@ -125,13 +125,20 @@ export function UserProvider({ children }: { children: ReactNode }) {
           if (userData.onboardingComplete) {
             dispatch({ type: 'COMPLETE_ONBOARDING' });
           }
-          if (userData.stats) {
-            dispatch({ type: 'UPDATE_STATS', payload: userData.stats });
+          if (userData.dignityCoins !== undefined || userData.impactScore !== undefined || userData.level) {
+            dispatch({ type: 'UPDATE_STATS', payload: {
+              dignityCoins: userData.dignityCoins || 0,
+              impactScore: userData.impactScore || 0,
+              level: userData.level || 'explorer',
+              badges: userData.badges || []
+            }});
           }
         }
-      } catch (error) {
-        console.error('Error loading user data:', error);
       }
+    } catch (error) {
+      console.error('Error loading user data:', error);
+      // Clear corrupted data
+      localStorage.removeItem('atlas-user');
     }
   }, []);
 
