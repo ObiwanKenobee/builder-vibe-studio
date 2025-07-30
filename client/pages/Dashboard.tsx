@@ -154,8 +154,18 @@ function WorkspaceGrid() {
             <Link to={workspace.path}>
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <div className={`w-12 h-12 rounded-lg bg-${workspace.color}/20 flex items-center justify-center group-hover:scale-110 transition-transform`}>
-                    <workspace.icon className={`w-6 h-6 text-${workspace.color}`} />
+                  <div className={`w-12 h-12 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform ${
+                    workspace.color === 'atlas-gold' ? 'bg-atlas-gold/20' :
+                    workspace.color === 'atlas-cosmic' ? 'bg-atlas-cosmic/20' :
+                    workspace.color === 'atlas-regenerative' ? 'bg-atlas-regenerative/20' :
+                    'bg-atlas-wisdom/20'
+                  }`}>
+                    <workspace.icon className={`w-6 h-6 ${
+                      workspace.color === 'atlas-gold' ? 'text-atlas-gold' :
+                      workspace.color === 'atlas-cosmic' ? 'text-atlas-cosmic' :
+                      workspace.color === 'atlas-regenerative' ? 'text-atlas-regenerative' :
+                      'text-atlas-wisdom'
+                    }`} />
                   </div>
                   <ArrowRight className="w-5 h-5 text-foreground/40 group-hover:text-atlas-gold group-hover:translate-x-1 transition-all" />
                 </div>
