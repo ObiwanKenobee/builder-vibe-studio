@@ -59,6 +59,11 @@ export default function OnboardingWizard() {
   const [selectedPersona, setSelectedPersona] = useState<PersonaType>(null);
   const [values, setValues] = useState<Record<string, string>>({});
 
+  // Don't render if context is not ready
+  if (!state) {
+    return null;
+  }
+
   const handlePersonaSelect = (persona: PersonaType) => {
     setSelectedPersona(persona);
     dispatch({ type: 'SET_PERSONA', payload: persona });
