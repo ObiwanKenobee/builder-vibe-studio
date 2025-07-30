@@ -33,6 +33,11 @@ const walletOptions = [
 export default function WalletModal() {
   const { state, dispatch } = useUser();
 
+  // Don't render if context is not ready
+  if (!state) {
+    return null;
+  }
+
   const handleConnect = async (walletName: string) => {
     dispatch({ type: 'SET_CONNECTING', payload: true });
     
