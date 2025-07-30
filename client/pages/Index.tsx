@@ -426,6 +426,9 @@ export default function Index() {
       {/* Modals */}
       <WalletModal />
       <OnboardingWizard />
+
+      {/* Floating Banner */}
+      <FloatingBanner />
     </div>
   );
 }
