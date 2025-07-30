@@ -15,6 +15,7 @@ import DignityCoin from "./pages/DignityCoin";
 import Fellowship from "./pages/Fellowship";
 import Dashboard from "./pages/Dashboard";
 import PainTransmutation from "./pages/PainTransmutation";
+import Analytics from "./pages/Analytics";
 import { useEffect } from "react";
 
 const queryClient = new QueryClient();
