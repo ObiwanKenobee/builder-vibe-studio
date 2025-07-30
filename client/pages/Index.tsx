@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useUser } from "@/contexts/UserContext";
 import WalletModal from "@/components/WalletModal";
 import OnboardingWizard from "@/components/OnboardingWizard";
+import SEOHead from "@/components/SEOHead";
 
 // Three.js constellation component
 function ConstellationBackground() {
