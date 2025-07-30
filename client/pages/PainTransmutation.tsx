@@ -402,9 +402,45 @@ Her transformation became a template others followed, proving that even the most
 export default function PainTransmutation() {
   const { state } = useUser();
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Pain Transmutation Studio - Atlas Sanctum",
+    "description": "AI-powered platform for transforming personal and collective crises into healing poetry, sacred rituals, and regenerative music.",
+    "applicationCategory": "CreativeApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    },
+    "featureList": [
+      "AI crisis transformation",
+      "Poetry generation from pain",
+      "Sacred ritual creation",
+      "Regenerative music composition",
+      "Emotional healing algorithms"
+    ],
+    "creator": {
+      "@type": "Organization",
+      "name": "Atlas Sanctum"
+    },
+    "audience": {
+      "@type": "Audience",
+      "audienceType": "Artists, Healers, Spiritual Practitioners, Community Workers"
+    }
+  };
+
   if (!state.user.isConnected) {
     return (
       <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
+        <SEOHead
+          title="Access Pain Transmutation Studio - AI Crisis to Healing Platform"
+          description="Connect your wallet to access the revolutionary AI-powered Pain Transmutation Studio. Transform personal and collective crises into healing poetry, rituals, and music."
+          keywords="pain transmutation studio access, AI crisis transformation, healing art platform, crisis to poetry AI, emotional healing tools"
+          structuredData={structuredData}
+        />
         <div className="text-center space-y-6">
           <div className="w-16 h-16 mx-auto rounded-full bg-atlas-cosmic/20 flex items-center justify-center">
             <Sparkles className="w-8 h-8 text-atlas-cosmic" />
@@ -425,6 +461,14 @@ export default function PainTransmutation() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEOHead
+        title="Pain Transmutation Studio - AI Crisis to Healing Transformation | Atlas Sanctum"
+        description="Transform personal and collective crises into healing poetry, sacred rituals, and regenerative music with our proprietary AI meaning-making algorithms. Turn pain into purpose."
+        keywords="pain transmutation AI, crisis to art platform, healing poetry generator, sacred ritual creation, AI emotional transformation, regenerative music, meaning making algorithms, trauma to healing"
+        persona={state.user.persona}
+        structuredData={structuredData}
+      />
+
       {/* Navigation */}
       <nav className="border-b border-border bg-background/80 backdrop-blur-lg">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -432,7 +476,7 @@ export default function PainTransmutation() {
             <ArrowLeft className="h-5 w-5" />
             <span>Back to Sanctum</span>
           </Link>
-          
+
           <div className="flex items-center space-x-2">
             <Sparkles className="w-6 h-6 text-atlas-cosmic" />
             <span className="text-xl font-semibold text-foreground">Pain Transmutation Studio</span>
