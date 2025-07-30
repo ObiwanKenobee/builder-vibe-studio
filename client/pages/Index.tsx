@@ -305,6 +305,10 @@ export default function Index() {
       <FeaturesSection />
       <FellowshipSection />
       <Footer />
+
+      {/* Modals */}
+      <WalletModal />
+      <OnboardingWizard />
     </div>
   );
 }
