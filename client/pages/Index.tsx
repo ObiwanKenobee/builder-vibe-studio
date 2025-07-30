@@ -1,7 +1,16 @@
 import { Canvas } from "@react-three/fiber";
 import { Stars, OrbitControls } from "@react-three/drei";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, Globe, Book, Coins, Zap, Users, ArrowRight, Wallet } from "lucide-react";
+import {
+  ChevronDown,
+  Globe,
+  Book,
+  Coins,
+  Zap,
+  Users,
+  ArrowRight,
+  Wallet,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useUser } from "@/contexts/UserContext";
@@ -50,33 +59,51 @@ function Navigation() {
   const handleWalletClick = () => {
     if (state.user.isConnected) {
       // Show user menu or dashboard
-      window.location.href = '/dashboard';
+      window.location.href = "/dashboard";
     } else {
-      dispatch({ type: 'SET_WALLET_MODAL', payload: true });
+      dispatch({ type: "SET_WALLET_MODAL", payload: true });
     }
   };
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      isScrolled ? "bg-background/80 backdrop-blur-lg border-b border-border" : "bg-transparent"
-    }`}>
+    <nav
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-background/80 backdrop-blur-lg border-b border-border"
+          : "bg-transparent"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <Globe className="h-8 w-8 text-atlas-gold" />
-          <span className="text-2xl font-bold text-foreground">Atlas Sanctum</span>
+          <span className="text-2xl font-bold text-foreground">
+            Atlas Sanctum
+          </span>
         </div>
 
         <div className="hidden md:flex items-center space-x-8">
-          <Link to="/sanctum-map" className="text-foreground/80 hover:text-atlas-gold transition-colors">
+          <Link
+            to="/sanctum-map"
+            className="text-foreground/80 hover:text-atlas-gold transition-colors"
+          >
             Sanctum Map
           </Link>
-          <Link to="/library" className="text-foreground/80 hover:text-atlas-gold transition-colors">
+          <Link
+            to="/library"
+            className="text-foreground/80 hover:text-atlas-gold transition-colors"
+          >
             Library
           </Link>
-          <Link to="/dignity-coin" className="text-foreground/80 hover:text-atlas-gold transition-colors">
+          <Link
+            to="/dignity-coin"
+            className="text-foreground/80 hover:text-atlas-gold transition-colors"
+          >
             Dignity Coin
           </Link>
-          <Link to="/fellowship" className="text-foreground/80 hover:text-atlas-gold transition-colors">
+          <Link
+            to="/fellowship"
+            className="text-foreground/80 hover:text-atlas-gold transition-colors"
+          >
             Fellowship
           </Link>
         </div>
@@ -88,7 +115,8 @@ function Navigation() {
           {state.user.isConnected ? (
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-atlas-regenerative rounded-full" />
-              {state.user.address?.slice(0, 6)}...{state.user.address?.slice(-4)}
+              {state.user.address?.slice(0, 6)}...
+              {state.user.address?.slice(-4)}
             </div>
           ) : (
             <>
@@ -108,11 +136,11 @@ function HeroSection() {
 
   const handleEnterSanctum = () => {
     if (state.user.isConnected && state.user.onboardingComplete) {
-      window.location.href = '/dashboard';
+      window.location.href = "/dashboard";
     } else if (state.user.isConnected) {
-      dispatch({ type: 'SET_ONBOARDING', payload: true });
+      dispatch({ type: "SET_ONBOARDING", payload: true });
     } else {
-      dispatch({ type: 'SET_WALLET_MODAL', payload: true });
+      dispatch({ type: "SET_WALLET_MODAL", payload: true });
     }
   };
 
@@ -152,11 +180,9 @@ function HeroSection() {
         </h1>
 
         <p className="text-xl md:text-2xl text-foreground/80 mb-12 max-w-3xl mx-auto leading-relaxed">
-          {state.user.isConnected && state.user.onboardingComplete ? (
-            `Welcome back, ${state.user.persona ? state.user.persona.charAt(0).toUpperCase() + state.user.persona.slice(1) : 'Guardian'}. Your regenerative journey continues.`
-          ) : (
-            'Welcome to Atlas Sanctum, where financial empires transform into forces of planetary healing. Experience the future of regenerative finance through immersive storytelling and ethical analytics.'
-          )}
+          {state.user.isConnected && state.user.onboardingComplete
+            ? `Welcome back, ${state.user.persona ? state.user.persona.charAt(0).toUpperCase() + state.user.persona.slice(1) : "Guardian"}. Your regenerative journey continues.`
+            : "Welcome to Atlas Sanctum, where financial empires transform into forces of planetary healing. Experience the future of regenerative finance through immersive storytelling and ethical analytics."}
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
@@ -165,10 +191,16 @@ function HeroSection() {
             onClick={handleEnterSanctum}
             className="bg-atlas-gold hover:bg-atlas-gold/90 text-atlas-deep font-semibold text-lg px-8 py-4 group"
           >
-            {state.user.isConnected && state.user.onboardingComplete ? 'Continue Journey' : 'Enter Sanctum'}
+            {state.user.isConnected && state.user.onboardingComplete
+              ? "Continue Journey"
+              : "Enter Sanctum"}
             <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </Button>
-          <Button size="lg" variant="outline" className="border-atlas-cosmic text-atlas-cosmic hover:bg-atlas-cosmic/10 text-lg px-8 py-4">
+          <Button
+            size="lg"
+            variant="outline"
+            className="border-atlas-cosmic text-atlas-cosmic hover:bg-atlas-cosmic/10 text-lg px-8 py-4"
+          >
             Watch Story
           </Button>
         </div>
@@ -188,68 +220,87 @@ function FeaturesSection() {
     {
       icon: Globe,
       title: "Interactive Sanctum Map",
-      description: "Revolutionary 3D financial flow visualization revealing how capital moves through regenerative ecosystems. Track ethical investment impacts across planetary healing projects with real-time ESG analytics.",
+      description:
+        "Revolutionary 3D financial flow visualization revealing how capital moves through regenerative ecosystems. Track ethical investment impacts across planetary healing projects with real-time ESG analytics.",
       color: "atlas-wisdom",
-      keywords: "financial flow map, ethical investment tracking, ESG analytics, impact investing dashboard",
+      keywords:
+        "financial flow map, ethical investment tracking, ESG analytics, impact investing dashboard",
       schema: {
         "@type": "SoftwareApplication",
-        "name": "Sanctum Map",
-        "description": "3D interactive globe for tracking regenerative financial flows",
-        "applicationCategory": "Finance",
-        "featureList": ["Real-time data visualization", "Impact tracking", "Geographic insights"]
-      }
+        name: "Sanctum Map",
+        description:
+          "3D interactive globe for tracking regenerative financial flows",
+        applicationCategory: "Finance",
+        featureList: [
+          "Real-time data visualization",
+          "Impact tracking",
+          "Geographic insights",
+        ],
+      },
     },
     {
       icon: Book,
       title: "AI-Powered Wisdom Library",
-      description: "Global repository of regenerative finance wisdom with semantic search across cultures. Access curated texts, indigenous knowledge, and AI-generated ethics-in-motion narratives for conscious decision-making.",
+      description:
+        "Global repository of regenerative finance wisdom with semantic search across cultures. Access curated texts, indigenous knowledge, and AI-generated ethics-in-motion narratives for conscious decision-making.",
       color: "atlas-cosmic",
-      keywords: "wisdom library, AI semantic search, regenerative finance education, ethical decision making",
+      keywords:
+        "wisdom library, AI semantic search, regenerative finance education, ethical decision making",
       schema: {
         "@type": "DigitalDocument",
-        "name": "Library of Living Meaning",
-        "description": "Curated wisdom texts for regenerative finance",
-        "genre": "Educational Resource"
-      }
+        name: "Library of Living Meaning",
+        description: "Curated wisdom texts for regenerative finance",
+        genre: "Educational Resource",
+      },
     },
     {
       icon: Coins,
       title: "Dignity Coin Ecosystem",
-      description: "Breakthrough covenant-based cryptocurrency linking investments to measurable planetary healing outcomes. Track SDG impact scores, regenerative project funding, and transparent capital allocation.",
+      description:
+        "Breakthrough covenant-based cryptocurrency linking investments to measurable planetary healing outcomes. Track SDG impact scores, regenerative project funding, and transparent capital allocation.",
       color: "atlas-gold",
-      keywords: "dignity coin, covenant investing, impact cryptocurrency, SDG tracking, regenerative funding",
+      keywords:
+        "dignity coin, covenant investing, impact cryptocurrency, SDG tracking, regenerative funding",
       schema: {
         "@type": "Product",
-        "name": "Dignity Coin",
-        "description": "Covenant-based cryptocurrency for impact investing",
-        "category": "Cryptocurrency"
-      }
+        name: "Dignity Coin",
+        description: "Covenant-based cryptocurrency for impact investing",
+        category: "Cryptocurrency",
+      },
     },
     {
       icon: Zap,
       title: "Crisis Transformation AI",
-      description: "Proprietary AI engine converting personal and collective crises into healing poetry, sacred rituals, and regenerative music. Transform pain into purpose with our meaning-making algorithms.",
+      description:
+        "Proprietary AI engine converting personal and collective crises into healing poetry, sacred rituals, and regenerative music. Transform pain into purpose with our meaning-making algorithms.",
       color: "atlas-regenerative",
-      keywords: "AI crisis transformation, pain to art, healing algorithms, regenerative storytelling",
+      keywords:
+        "AI crisis transformation, pain to art, healing algorithms, regenerative storytelling",
       schema: {
         "@type": "SoftwareApplication",
-        "name": "Pain Transmutation Studio",
-        "description": "AI-powered platform for transforming crisis into healing art",
-        "applicationCategory": "Creativity"
-      }
-    }
+        name: "Pain Transmutation Studio",
+        description:
+          "AI-powered platform for transforming crisis into healing art",
+        applicationCategory: "Creativity",
+      },
+    },
   ];
 
   return (
-    <section className="py-20 px-6" itemScope itemType="https://schema.org/ItemList">
+    <section
+      className="py-20 px-6"
+      itemScope
+      itemType="https://schema.org/ItemList"
+    >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
             Regenerative Finance Revolution: Four Breakthrough Technologies
           </h2>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
-            Connect ethical capital to planetary healing through AI-powered insights, interactive mapping,
-            and transparent impact tracking. The future of conscious investing starts here.
+            Connect ethical capital to planetary healing through AI-powered
+            insights, interactive mapping, and transparent impact tracking. The
+            future of conscious investing starts here.
           </p>
         </div>
 
@@ -263,23 +314,39 @@ function FeaturesSection() {
               itemProp="itemListElement"
             >
               <meta itemProp="position" content={String(index + 1)} />
-              <div className={`w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform ${
-                feature.color === 'atlas-gold' ? 'bg-atlas-gold/20' :
-                feature.color === 'atlas-cosmic' ? 'bg-atlas-cosmic/20' :
-                feature.color === 'atlas-regenerative' ? 'bg-atlas-regenerative/20' :
-                'bg-atlas-wisdom/20'
-              }`}>
-                <feature.icon className={`w-8 h-8 ${
-                  feature.color === 'atlas-gold' ? 'text-atlas-gold' :
-                  feature.color === 'atlas-cosmic' ? 'text-atlas-cosmic' :
-                  feature.color === 'atlas-regenerative' ? 'text-atlas-regenerative' :
-                  'text-atlas-wisdom'
-                }`} />
+              <div
+                className={`w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform ${
+                  feature.color === "atlas-gold"
+                    ? "bg-atlas-gold/20"
+                    : feature.color === "atlas-cosmic"
+                      ? "bg-atlas-cosmic/20"
+                      : feature.color === "atlas-regenerative"
+                        ? "bg-atlas-regenerative/20"
+                        : "bg-atlas-wisdom/20"
+                }`}
+              >
+                <feature.icon
+                  className={`w-8 h-8 ${
+                    feature.color === "atlas-gold"
+                      ? "text-atlas-gold"
+                      : feature.color === "atlas-cosmic"
+                        ? "text-atlas-cosmic"
+                        : feature.color === "atlas-regenerative"
+                          ? "text-atlas-regenerative"
+                          : "text-atlas-wisdom"
+                  }`}
+                />
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-foreground group-hover:text-atlas-gold transition-colors" itemProp="name">
+              <h3
+                className="text-xl font-semibold mb-4 text-foreground group-hover:text-atlas-gold transition-colors"
+                itemProp="name"
+              >
                 {feature.title}
               </h3>
-              <p className="text-foreground/70 leading-relaxed" itemProp="description">
+              <p
+                className="text-foreground/70 leading-relaxed"
+                itemProp="description"
+              >
                 {feature.description}
               </p>
               <meta itemProp="keywords" content={feature.keywords} />
@@ -305,16 +372,24 @@ function FellowshipSection() {
             Join the Regenerative Custodianship Fellowship
           </h2>
           <p className="text-xl text-foreground/80 mb-8 leading-relaxed">
-            Become a guardian of planetary consciousness. Access advanced analytics, 
-            curated wisdom, and connect with visionaries reshaping finance for regeneration.
+            Become a guardian of planetary consciousness. Access advanced
+            analytics, curated wisdom, and connect with visionaries reshaping
+            finance for regeneration.
           </p>
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button size="lg" className="bg-atlas-cosmic hover:bg-atlas-cosmic/90 text-white font-semibold text-lg px-8 py-4">
+          <Button
+            size="lg"
+            className="bg-atlas-cosmic hover:bg-atlas-cosmic/90 text-white font-semibold text-lg px-8 py-4"
+          >
             Begin Fellowship
           </Button>
-          <Button size="lg" variant="outline" className="border-atlas-wisdom text-atlas-wisdom hover:bg-atlas-wisdom/10 text-lg px-8 py-4">
+          <Button
+            size="lg"
+            variant="outline"
+            className="border-atlas-wisdom text-atlas-wisdom hover:bg-atlas-wisdom/10 text-lg px-8 py-4"
+          >
             Learn More
           </Button>
         </div>
@@ -331,19 +406,32 @@ function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center space-x-2 mb-4 md:mb-0">
             <Globe className="h-6 w-6 text-atlas-gold" />
-            <span className="text-lg font-semibold text-foreground">Atlas Sanctum</span>
+            <span className="text-lg font-semibold text-foreground">
+              Atlas Sanctum
+            </span>
           </div>
-          
+
           <div className="flex space-x-6 text-foreground/60">
-            <a href="#" className="hover:text-atlas-gold transition-colors">Privacy</a>
-            <a href="#" className="hover:text-atlas-gold transition-colors">Terms</a>
-            <a href="#" className="hover:text-atlas-gold transition-colors">Documentation</a>
-            <a href="#" className="hover:text-atlas-gold transition-colors">Support</a>
+            <a href="#" className="hover:text-atlas-gold transition-colors">
+              Privacy
+            </a>
+            <a href="#" className="hover:text-atlas-gold transition-colors">
+              Terms
+            </a>
+            <a href="#" className="hover:text-atlas-gold transition-colors">
+              Documentation
+            </a>
+            <a href="#" className="hover:text-atlas-gold transition-colors">
+              Support
+            </a>
           </div>
         </div>
-        
+
         <div className="mt-8 pt-8 border-t border-border text-center text-foreground/60">
-          <p>© 2024 Atlas Sanctum. Transforming capital into planetary consciousness.</p>
+          <p>
+            © 2024 Atlas Sanctum. Transforming capital into planetary
+            consciousness.
+          </p>
         </div>
       </div>
     </footer>
@@ -355,56 +443,66 @@ export default function Index() {
 
   // Generate persona-specific SEO
   const seoTitle = state.user.persona
-    ? `Atlas Sanctum - ${state.user.persona === 'custodian' ? 'Ethical Investment Platform' :
-         state.user.persona === 'creator' ? 'AI-Powered Creative Platform' :
-         state.user.persona === 'regenerator' ? 'Regenerative Project Funding' :
-         'Conscious Finance Map'}`
+    ? `Atlas Sanctum - ${
+        state.user.persona === "custodian"
+          ? "Ethical Investment Platform"
+          : state.user.persona === "creator"
+            ? "AI-Powered Creative Platform"
+            : state.user.persona === "regenerator"
+              ? "Regenerative Project Funding"
+              : "Conscious Finance Map"
+      }`
     : "Atlas Sanctum - Capital Becomes Conscience, Wealth Becomes Wisdom";
 
   const seoDescription = state.user.persona
-    ? `${state.user.persona === 'custodian' ? 'Professional dashboard for ethical capital custodians to redirect investments into regenerative projects with real-time impact analytics.' :
-         state.user.persona === 'creator' ? 'AI-powered platform for artists to transform crisis into healing through poetry, music, and wisdom narratives.' :
-         state.user.persona === 'regenerator' ? 'Transparent funding platform connecting planetary regeneration projects with ethical capital through AI-powered matching.' :
-         'Interactive map and tools for citizens to understand financial flows and take micro-actions for planetary healing.'}`
+    ? `${
+        state.user.persona === "custodian"
+          ? "Professional dashboard for ethical capital custodians to redirect investments into regenerative projects with real-time impact analytics."
+          : state.user.persona === "creator"
+            ? "AI-powered platform for artists to transform crisis into healing through poetry, music, and wisdom narratives."
+            : state.user.persona === "regenerator"
+              ? "Transparent funding platform connecting planetary regeneration projects with ethical capital through AI-powered matching."
+              : "Interactive map and tools for citizens to understand financial flows and take micro-actions for planetary healing."
+      }`
     : "Transform finance for planetary healing with the world's first regenerative finance platform. Connect ethical capital to regenerative projects through AI-powered insights and immersive storytelling.";
 
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "Atlas Sanctum",
-    "url": "https://atlassanctum.com",
-    "description": seoDescription,
-    "potentialAction": {
+    name: "Atlas Sanctum",
+    url: "https://atlassanctum.com",
+    description: seoDescription,
+    potentialAction: {
       "@type": "SearchAction",
-      "target": "https://atlassanctum.com/search?q={search_term_string}",
-      "query-input": "required name=search_term_string"
+      target: "https://atlassanctum.com/search?q={search_term_string}",
+      "query-input": "required name=search_term_string",
     },
-    "mainEntity": {
+    mainEntity: {
       "@type": "SoftwareApplication",
-      "name": "Atlas Sanctum Platform",
-      "applicationCategory": "FinanceApplication",
-      "operatingSystem": "Web Browser, iOS, Android",
-      "offers": {
+      name: "Atlas Sanctum Platform",
+      applicationCategory: "FinanceApplication",
+      operatingSystem: "Web Browser, iOS, Android",
+      offers: {
         "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD",
-        "category": "Free Tier Available"
+        price: "0",
+        priceCurrency: "USD",
+        category: "Free Tier Available",
       },
-      "aggregateRating": {
+      aggregateRating: {
         "@type": "AggregateRating",
-        "ratingValue": "4.8",
-        "reviewCount": "127",
-        "bestRating": "5",
-        "worstRating": "1"
+        ratingValue: "4.8",
+        reviewCount: "127",
+        bestRating: "5",
+        worstRating: "1",
       },
-      "featureList": [
+      featureList: [
         "3D Interactive Sanctum Map",
         "AI-Powered Pain Transmutation Studio",
         "Dignity Coin Tracking",
         "Regenerative Project Funding",
-        "Ethics-in-Motion Analytics"
-      ]
-    }
+        "Ethics-in-Motion Analytics",
+      ],
+    },
   };
 
   return (

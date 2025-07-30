@@ -1,8 +1,19 @@
-import { createContext, useContext, useReducer, useEffect, ReactNode } from 'react';
+import {
+  createContext,
+  useContext,
+  useReducer,
+  useEffect,
+  ReactNode,
+} from "react";
 
-export type PersonaType = 'custodian' | 'creator' | 'regenerator' | 'citizen' | null;
+export type PersonaType =
+  | "custodian"
+  | "creator"
+  | "regenerator"
+  | "citizen"
+  | null;
 
-export type UserLevel = 'explorer' | 'steward' | 'custodian' | 'guardian';
+export type UserLevel = "explorer" | "steward" | "custodian" | "guardian";
 
 export interface User {
   address?: string;
@@ -23,18 +34,18 @@ interface UserState {
 }
 
 type UserAction =
-  | { type: 'SET_CONNECTING'; payload: boolean }
-  | { type: 'SET_WALLET_MODAL'; payload: boolean }
-  | { type: 'SET_ONBOARDING'; payload: boolean }
-  | { type: 'CONNECT_WALLET'; payload: { address: string } }
-  | { type: 'SET_PERSONA'; payload: PersonaType }
-  | { type: 'COMPLETE_ONBOARDING' }
-  | { type: 'DISCONNECT_WALLET' }
-  | { type: 'UPDATE_STATS'; payload: Partial<User> };
+  | { type: "SET_CONNECTING"; payload: boolean }
+  | { type: "SET_WALLET_MODAL"; payload: boolean }
+  | { type: "SET_ONBOARDING"; payload: boolean }
+  | { type: "CONNECT_WALLET"; payload: { address: string } }
+  | { type: "SET_PERSONA"; payload: PersonaType }
+  | { type: "COMPLETE_ONBOARDING" }
+  | { type: "DISCONNECT_WALLET" }
+  | { type: "UPDATE_STATS"; payload: Partial<User> };
 
 const initialState: UserState = {
   user: {
-    level: 'explorer',
+    level: "explorer",
     isConnected: false,
     onboardingComplete: false,
     badges: [],
@@ -48,13 +59,13 @@ const initialState: UserState = {
 
 function userReducer(state: UserState, action: UserAction): UserState {
   switch (action.type) {
-    case 'SET_CONNECTING':
+    case "SET_CONNECTING":
       return { ...state, isConnecting: action.payload };
-    case 'SET_WALLET_MODAL':
+    case "SET_WALLET_MODAL":
       return { ...state, showWalletModal: action.payload };
-    case 'SET_ONBOARDING':
+    case "SET_ONBOARDING":
       return { ...state, showOnboarding: action.payload };
-    case 'CONNECT_WALLET':
+    case "CONNECT_WALLET":
       return {
         ...state,
         user: {
@@ -66,7 +77,7 @@ function userReducer(state: UserState, action: UserAction): UserState {
         showWalletModal: false,
         showOnboarding: true,
       };
-    case 'SET_PERSONA':
+    case "SET_PERSONA":
       return {
         ...state,
         user: {
@@ -74,7 +85,7 @@ function userReducer(state: UserState, action: UserAction): UserState {
           persona: action.payload,
         },
       };
-    case 'COMPLETE_ONBOARDING':
+    case "COMPLETE_ONBOARDING":
       return {
         ...state,
         user: {
@@ -83,14 +94,14 @@ function userReducer(state: UserState, action: UserAction): UserState {
         },
         showOnboarding: false,
       };
-    case 'DISCONNECT_WALLET':
+    case "DISCONNECT_WALLET":
       return {
         ...state,
         user: {
           ...initialState.user,
         },
       };
-    case 'UPDATE_STATS':
+    case "UPDATE_STATS":
       return {
         ...state,
         user: {
@@ -114,31 +125,41 @@ export function UserProvider({ children }: { children: ReactNode }) {
   // Load user data from localStorage on mount
   useEffect(() => {
     try {
-      const savedUser = localStorage.getItem('atlas-user');
-      if (savedUser && savedUser !== 'undefined' && savedUser !== 'null') {
+      const savedUser = localStorage.getItem("atlas-user");
+      if (savedUser && savedUser !== "undefined" && savedUser !== "null") {
         const userData = JSON.parse(savedUser);
-        if (userData && typeof userData === 'object' && userData.address) {
-          dispatch({ type: 'CONNECT_WALLET', payload: { address: userData.address } });
+        if (userData && typeof userData === "object" && userData.address) {
+          dispatch({
+            type: "CONNECT_WALLET",
+            payload: { address: userData.address },
+          });
           if (userData.persona) {
-            dispatch({ type: 'SET_PERSONA', payload: userData.persona });
+            dispatch({ type: "SET_PERSONA", payload: userData.persona });
           }
           if (userData.onboardingComplete) {
-            dispatch({ type: 'COMPLETE_ONBOARDING' });
+            dispatch({ type: "COMPLETE_ONBOARDING" });
           }
-          if (userData.dignityCoins !== undefined || userData.impactScore !== undefined || userData.level) {
-            dispatch({ type: 'UPDATE_STATS', payload: {
-              dignityCoins: userData.dignityCoins || 0,
-              impactScore: userData.impactScore || 0,
-              level: userData.level || 'explorer',
-              badges: userData.badges || []
-            }});
+          if (
+            userData.dignityCoins !== undefined ||
+            userData.impactScore !== undefined ||
+            userData.level
+          ) {
+            dispatch({
+              type: "UPDATE_STATS",
+              payload: {
+                dignityCoins: userData.dignityCoins || 0,
+                impactScore: userData.impactScore || 0,
+                level: userData.level || "explorer",
+                badges: userData.badges || [],
+              },
+            });
           }
         }
       }
     } catch (error) {
-      console.error('Error loading user data:', error);
+      console.error("Error loading user data:", error);
       // Clear corrupted data
-      localStorage.removeItem('atlas-user');
+      localStorage.removeItem("atlas-user");
     }
   }, []);
 
@@ -146,12 +167,12 @@ export function UserProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try {
       if (state.user.isConnected && state.user.address) {
-        localStorage.setItem('atlas-user', JSON.stringify(state.user));
+        localStorage.setItem("atlas-user", JSON.stringify(state.user));
       } else {
-        localStorage.removeItem('atlas-user');
+        localStorage.removeItem("atlas-user");
       }
     } catch (error) {
-      console.error('Error saving user data:', error);
+      console.error("Error saving user data:", error);
     }
   }, [state.user]);
 
@@ -165,7 +186,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
 export function useUser() {
   const context = useContext(UserContext);
   if (!context) {
-    throw new Error('useUser must be used within a UserProvider');
+    throw new Error("useUser must be used within a UserProvider");
   }
   return context;
 }
@@ -174,36 +195,42 @@ export function useUser() {
 export function getPersonaConfig(persona: PersonaType) {
   const configs = {
     custodian: {
-      title: 'Ethical Capital Custodian',
-      description: 'Redirect capital into regenerative, dignity-first investments',
-      color: 'atlas-gold',
-      icon: '👑',
-      workspaces: ['sanctum-map', 'dignity-coin', 'fellowship', 'reports'],
-      level: 'custodian' as UserLevel,
+      title: "Ethical Capital Custodian",
+      description:
+        "Redirect capital into regenerative, dignity-first investments",
+      color: "atlas-gold",
+      icon: "👑",
+      workspaces: ["sanctum-map", "dignity-coin", "fellowship", "reports"],
+      level: "custodian" as UserLevel,
     },
     creator: {
-      title: 'Cultural Creator',
-      description: 'Share wisdom and co-create narratives for ethical finance',
-      color: 'atlas-cosmic',
-      icon: '🎨',
-      workspaces: ['library', 'pain-transmutation', 'fellowship', 'narratives'],
-      level: 'steward' as UserLevel,
+      title: "Cultural Creator",
+      description: "Share wisdom and co-create narratives for ethical finance",
+      color: "atlas-cosmic",
+      icon: "🎨",
+      workspaces: ["library", "pain-transmutation", "fellowship", "narratives"],
+      level: "steward" as UserLevel,
     },
     regenerator: {
-      title: 'Planetary Regenerator',
-      description: 'Get visibility and funding for regenerative projects',
-      color: 'atlas-regenerative',
-      icon: '🌱',
-      workspaces: ['sanctum-map', 'project-portal', 'fellowship', 'showcase'],
-      level: 'steward' as UserLevel,
+      title: "Planetary Regenerator",
+      description: "Get visibility and funding for regenerative projects",
+      color: "atlas-regenerative",
+      icon: "🌱",
+      workspaces: ["sanctum-map", "project-portal", "fellowship", "showcase"],
+      level: "steward" as UserLevel,
     },
     citizen: {
-      title: 'Citizen of Conscience',
-      description: 'Gain understanding and agency in regenerative finance',
-      color: 'atlas-wisdom',
-      icon: '🕊️',
-      workspaces: ['sanctum-map', 'pain-transmutation', 'micro-dashboard', 'advocacy'],
-      level: 'explorer' as UserLevel,
+      title: "Citizen of Conscience",
+      description: "Gain understanding and agency in regenerative finance",
+      color: "atlas-wisdom",
+      icon: "🕊️",
+      workspaces: [
+        "sanctum-map",
+        "pain-transmutation",
+        "micro-dashboard",
+        "advocacy",
+      ],
+      level: "explorer" as UserLevel,
     },
   };
 

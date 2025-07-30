@@ -20,7 +20,7 @@
       "label": "Atlas Sanctum Dashboard - Desktop View"
     },
     {
-      "src": "/screenshots/mobile-1.jpg", 
+      "src": "/screenshots/mobile-1.jpg",
       "sizes": "390x844",
       "type": "image/jpeg",
       "platform": "narrow",
@@ -34,13 +34,13 @@
       "type": "image/png"
     },
     {
-      "src": "/favicon-32x32.png", 
+      "src": "/favicon-32x32.png",
       "sizes": "32x32",
       "type": "image/png"
     },
     {
       "src": "/apple-touch-icon.png",
-      "sizes": "180x180", 
+      "sizes": "180x180",
       "type": "image/png"
     },
     {
@@ -73,7 +73,7 @@
       "name": "Pain Transmutation",
       "short_name": "Transform",
       "description": "Convert crisis into healing through AI",
-      "url": "/pain-transmutation", 
+      "url": "/pain-transmutation",
       "icons": [
         {
           "src": "/shortcuts/transform-icon.png",
@@ -83,7 +83,7 @@
     },
     {
       "name": "Fellowship",
-      "short_name": "Connect", 
+      "short_name": "Connect",
       "description": "Join regenerative custodians worldwide",
       "url": "/fellowship",
       "icons": [

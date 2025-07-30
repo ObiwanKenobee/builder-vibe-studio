@@ -9,11 +9,11 @@ interface PlaceholderPageProps {
   comingSoon?: boolean;
 }
 
-export default function PlaceholderPage({ 
-  title, 
-  description, 
-  icon, 
-  comingSoon = true 
+export default function PlaceholderPage({
+  title,
+  description,
+  icon,
+  comingSoon = true,
 }: PlaceholderPageProps) {
   return (
     <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
@@ -32,12 +32,12 @@ export default function PlaceholderPage({
               Back to Sanctum
             </span>
           </Link>
-          
+
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 text-atlas-gold">
-              {icon}
-            </div>
-            <span className="text-xl font-semibold text-foreground">{title}</span>
+            <div className="w-8 h-8 text-atlas-gold">{icon}</div>
+            <span className="text-xl font-semibold text-foreground">
+              {title}
+            </span>
           </div>
         </div>
       </nav>
@@ -50,16 +50,14 @@ export default function PlaceholderPage({
               {comingSoon ? (
                 <Construction className="w-12 h-12 text-atlas-cosmic" />
               ) : (
-                <div className="w-12 h-12 text-atlas-cosmic">
-                  {icon}
-                </div>
+                <div className="w-12 h-12 text-atlas-cosmic">{icon}</div>
               )}
             </div>
-            
+
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
               {title}
             </h1>
-            
+
             <p className="text-xl text-foreground/80 mb-8 leading-relaxed">
               {description}
             </p>
@@ -74,17 +72,21 @@ export default function PlaceholderPage({
 
           <div className="space-y-4">
             <p className="text-foreground/60">
-              This module is being carefully crafted with immersive storytelling and cutting-edge technology. 
-              Continue exploring or return to the main Sanctum to discover other available features.
+              This module is being carefully crafted with immersive storytelling
+              and cutting-edge technology. Continue exploring or return to the
+              main Sanctum to discover other available features.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
               <Link to="/">
                 <Button className="bg-atlas-gold hover:bg-atlas-gold/90 text-atlas-deep font-semibold">
                   Explore Sanctum
                 </Button>
               </Link>
-              <Button variant="outline" className="border-atlas-cosmic text-atlas-cosmic hover:bg-atlas-cosmic/10">
+              <Button
+                variant="outline"
+                className="border-atlas-cosmic text-atlas-cosmic hover:bg-atlas-cosmic/10"
+              >
                 Get Notified
               </Button>
             </div>

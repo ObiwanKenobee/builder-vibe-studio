@@ -21,20 +21,28 @@ const queryClient = new QueryClient();
 
 // Register Service Worker for PWA functionality
 function registerServiceWorker() {
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js')
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker
+        .register("/sw.js")
         .then((registration) => {
-          console.log('SW registered: ', registration);
+          console.log("SW registered: ", registration);
 
           // Check for updates
-          registration.addEventListener('updatefound', () => {
+          registration.addEventListener("updatefound", () => {
             const newWorker = registration.installing;
             if (newWorker) {
-              newWorker.addEventListener('statechange', () => {
-                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              newWorker.addEventListener("statechange", () => {
+                if (
+                  newWorker.state === "installed" &&
+                  navigator.serviceWorker.controller
+                ) {
                   // New content available, prompt user to refresh
-                  if (confirm('New version available! Reload to update Atlas Sanctum?')) {
+                  if (
+                    confirm(
+                      "New version available! Reload to update Atlas Sanctum?",
+                    )
+                  ) {
                     window.location.reload();
                   }
                 }
@@ -43,7 +51,7 @@ function registerServiceWorker() {
           });
         })
         .catch((registrationError) => {
-          console.log('SW registration failed: ', registrationError);
+          console.log("SW registration failed: ", registrationError);
         });
     });
   }
@@ -68,7 +76,10 @@ function AppWithPWA() {
               <Route path="/library" element={<Library />} />
               <Route path="/dignity-coin" element={<DignityCoin />} />
               <Route path="/fellowship" element={<Fellowship />} />
-              <Route path="/pain-transmutation" element={<PainTransmutation />} />
+              <Route
+                path="/pain-transmutation"
+                element={<PainTransmutation />}
+              />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

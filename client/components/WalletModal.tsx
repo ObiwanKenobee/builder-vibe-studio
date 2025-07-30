@@ -1,31 +1,36 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useUser } from "@/contexts/UserContext";
 import { Wallet, Zap, Shield, Globe, Loader2 } from "lucide-react";
 
 const walletOptions = [
   {
-    name: 'MetaMask',
-    icon: '🦊',
-    description: 'Connect using MetaMask browser extension',
+    name: "MetaMask",
+    icon: "🦊",
+    description: "Connect using MetaMask browser extension",
     popular: true,
   },
   {
-    name: 'WalletConnect',
-    icon: '🔗',
-    description: 'Scan with WalletConnect-compatible wallet',
+    name: "WalletConnect",
+    icon: "🔗",
+    description: "Scan with WalletConnect-compatible wallet",
     popular: false,
   },
   {
-    name: 'Coinbase Wallet',
-    icon: '💙',
-    description: 'Connect using Coinbase Wallet',
+    name: "Coinbase Wallet",
+    icon: "💙",
+    description: "Connect using Coinbase Wallet",
     popular: false,
   },
   {
-    name: 'Rainbow',
-    icon: '🌈',
-    description: 'Connect using Rainbow wallet',
+    name: "Rainbow",
+    icon: "🌈",
+    description: "Connect using Rainbow wallet",
     popular: false,
   },
 ];
@@ -39,41 +44,41 @@ export default function WalletModal() {
   }
 
   const handleConnect = async (walletName: string) => {
-    dispatch({ type: 'SET_CONNECTING', payload: true });
-    
+    dispatch({ type: "SET_CONNECTING", payload: true });
+
     try {
       // Simulate wallet connection (replace with actual Web3 integration)
-      if (typeof window !== 'undefined' && (window as any).ethereum) {
+      if (typeof window !== "undefined" && (window as any).ethereum) {
         const accounts = await (window as any).ethereum.request({
-          method: 'eth_requestAccounts',
+          method: "eth_requestAccounts",
         });
-        
+
         if (accounts.length > 0) {
           const address = accounts[0];
-          dispatch({ 
-            type: 'CONNECT_WALLET', 
-            payload: { address } 
+          dispatch({
+            type: "CONNECT_WALLET",
+            payload: { address },
           });
         }
       } else {
         // Fallback demo mode
         const demoAddress = `0x${Math.random().toString(16).substr(2, 40)}`;
         setTimeout(() => {
-          dispatch({ 
-            type: 'CONNECT_WALLET', 
-            payload: { address: demoAddress } 
+          dispatch({
+            type: "CONNECT_WALLET",
+            payload: { address: demoAddress },
           });
         }, 1500);
       }
     } catch (error) {
-      console.error('Wallet connection failed:', error);
-      dispatch({ type: 'SET_CONNECTING', payload: false });
+      console.error("Wallet connection failed:", error);
+      dispatch({ type: "SET_CONNECTING", payload: false });
     }
   };
 
   const handleClose = () => {
     if (!state.isConnecting) {
-      dispatch({ type: 'SET_WALLET_MODAL', payload: false });
+      dispatch({ type: "SET_WALLET_MODAL", payload: false });
     }
   };
 
@@ -92,9 +97,10 @@ export default function WalletModal() {
         <div className="space-y-4 py-4">
           <div className="text-sm text-foreground/70 space-y-2">
             <p>
-              Connect your wallet to access the full Atlas Sanctum experience and join the regenerative finance revolution.
+              Connect your wallet to access the full Atlas Sanctum experience
+              and join the regenerative finance revolution.
             </p>
-            
+
             <div className="flex items-center gap-6 text-xs bg-muted/50 rounded-lg p-3 mt-4">
               <div className="flex items-center gap-2">
                 <Shield className="w-4 h-4 text-atlas-wisdom" />
@@ -124,14 +130,18 @@ export default function WalletModal() {
                   <div className="text-2xl">{wallet.icon}</div>
                   <div className="flex-1 text-left">
                     <div className="flex items-center gap-2">
-                      <span className="font-medium text-foreground">{wallet.name}</span>
+                      <span className="font-medium text-foreground">
+                        {wallet.name}
+                      </span>
                       {wallet.popular && (
                         <span className="px-2 py-1 bg-atlas-cosmic/20 text-atlas-cosmic text-xs rounded-full">
                           Popular
                         </span>
                       )}
                     </div>
-                    <p className="text-sm text-foreground/60 mt-1">{wallet.description}</p>
+                    <p className="text-sm text-foreground/60 mt-1">
+                      {wallet.description}
+                    </p>
                   </div>
                   {state.isConnecting && (
                     <Loader2 className="w-4 h-4 animate-spin text-atlas-gold" />
@@ -143,7 +153,7 @@ export default function WalletModal() {
 
           <div className="pt-4 border-t border-border">
             <p className="text-xs text-foreground/50 text-center">
-              New to crypto wallets?{' '}
+              New to crypto wallets?{" "}
               <button className="text-atlas-wisdom hover:text-atlas-wisdom/80 underline">
                 Learn how to get started
               </button>
