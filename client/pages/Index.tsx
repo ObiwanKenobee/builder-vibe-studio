@@ -223,6 +223,7 @@ function FeaturesSection() {
       description:
         "Revolutionary 3D financial flow visualization revealing how capital moves through regenerative ecosystems. Track ethical investment impacts across planetary healing projects with real-time ESG analytics.",
       color: "atlas-wisdom",
+      path: "/sanctum-map",
       keywords:
         "financial flow map, ethical investment tracking, ESG analytics, impact investing dashboard",
       schema: {
@@ -244,6 +245,7 @@ function FeaturesSection() {
       description:
         "Global repository of regenerative finance wisdom with semantic search across cultures. Access curated texts, indigenous knowledge, and AI-generated ethics-in-motion narratives for conscious decision-making.",
       color: "atlas-cosmic",
+      path: "/library",
       keywords:
         "wisdom library, AI semantic search, regenerative finance education, ethical decision making",
       schema: {
@@ -259,6 +261,7 @@ function FeaturesSection() {
       description:
         "Breakthrough covenant-based cryptocurrency linking investments to measurable planetary healing outcomes. Track SDG impact scores, regenerative project funding, and transparent capital allocation.",
       color: "atlas-gold",
+      path: "/dignity-coin",
       keywords:
         "dignity coin, covenant investing, impact cryptocurrency, SDG tracking, regenerative funding",
       schema: {
@@ -274,6 +277,7 @@ function FeaturesSection() {
       description:
         "Proprietary AI engine converting personal and collective crises into healing poetry, sacred rituals, and regenerative music. Transform pain into purpose with our meaning-making algorithms.",
       color: "atlas-regenerative",
+      path: "/pain-transmutation",
       keywords:
         "AI crisis transformation, pain to art, healing algorithms, regenerative storytelling",
       schema: {
