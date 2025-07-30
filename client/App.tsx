@@ -13,6 +13,8 @@ import SanctumMap from "./pages/SanctumMap";
 import Library from "./pages/Library";
 import DignityCoin from "./pages/DignityCoin";
 import Fellowship from "./pages/Fellowship";
+import Dashboard from "./pages/Dashboard";
+import PainTransmutation from "./pages/PainTransmutation";
 
 const queryClient = new QueryClient();
 
