@@ -341,23 +341,34 @@ export default function FloatingBanner() {
                   </p>
 
                   {/* Action Buttons */}
-                  <div className="flex gap-2">
+                  <div className="space-y-2">
+                    <div className="flex gap-2">
+                      <Button
+                        size="sm"
+                        onClick={handleExploreMap}
+                        variant="outline"
+                        className="flex-1 text-xs border-atlas-wisdom text-atlas-wisdom hover:bg-atlas-wisdom/10"
+                      >
+                        <Globe className="w-3 h-3 mr-1" />
+                        Explore Map
+                      </Button>
+                      <Button
+                        size="sm"
+                        onClick={handleJoinCustodians}
+                        className="flex-1 text-xs bg-atlas-gold hover:bg-atlas-gold/90 text-atlas-deep"
+                      >
+                        <ArrowRight className="w-3 h-3 mr-1" />
+                        Join Now
+                      </Button>
+                    </div>
                     <Button
                       size="sm"
-                      onClick={handleExploreMap}
-                      variant="outline"
-                      className="flex-1 text-xs border-atlas-wisdom text-atlas-wisdom hover:bg-atlas-wisdom/10"
+                      onClick={handlePreviewNewsletter}
+                      variant="ghost"
+                      className="w-full text-xs text-atlas-cosmic hover:bg-atlas-cosmic/10"
                     >
-                      <Globe className="w-3 h-3 mr-1" />
-                      Explore Map
-                    </Button>
-                    <Button
-                      size="sm"
-                      onClick={handleJoinCustodians}
-                      className="flex-1 text-xs bg-atlas-gold hover:bg-atlas-gold/90 text-atlas-deep"
-                    >
-                      <ArrowRight className="w-3 h-3 mr-1" />
-                      Join Now
+                      <Eye className="w-3 h-3 mr-1" />
+                      Preview "The Sanctum Dispatch"
                     </Button>
                   </div>
 
