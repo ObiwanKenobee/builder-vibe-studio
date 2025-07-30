@@ -35,6 +35,7 @@ function ConstellationBackground() {
 // Navigation Header
 function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { state, dispatch } = useUser();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,6 +44,15 @@ function Navigation() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleWalletClick = () => {
+    if (state.user.isConnected) {
+      // Show user menu or dashboard
+      window.location.href = '/dashboard';
+    } else {
+      dispatch({ type: 'SET_WALLET_MODAL', payload: true });
+    }
+  };
 
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
@@ -53,7 +63,7 @@ function Navigation() {
           <Globe className="h-8 w-8 text-atlas-gold" />
           <span className="text-2xl font-bold text-foreground">Atlas Sanctum</span>
         </div>
-        
+
         <div className="hidden md:flex items-center space-x-8">
           <Link to="/sanctum-map" className="text-foreground/80 hover:text-atlas-gold transition-colors">
             Sanctum Map
@@ -69,8 +79,21 @@ function Navigation() {
           </Link>
         </div>
 
-        <Button className="bg-atlas-gold hover:bg-atlas-gold/90 text-atlas-deep font-semibold">
-          Connect Wallet
+        <Button
+          onClick={handleWalletClick}
+          className="bg-atlas-gold hover:bg-atlas-gold/90 text-atlas-deep font-semibold"
+        >
+          {state.user.isConnected ? (
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-atlas-regenerative rounded-full" />
+              {state.user.address?.slice(0, 6)}...{state.user.address?.slice(-4)}
+            </div>
+          ) : (
+            <>
+              <Wallet className="w-4 h-4 mr-2" />
+              Connect Wallet
+            </>
+          )}
         </Button>
       </div>
     </nav>
