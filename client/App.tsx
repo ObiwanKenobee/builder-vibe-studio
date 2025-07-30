@@ -18,6 +18,7 @@ import Dashboard from "./pages/Dashboard";
 import PainTransmutation from "./pages/PainTransmutation";
 import Analytics from "./pages/Analytics";
 import { useEffect } from "react";
+import { initializePerformanceOptimizations } from "@/lib/performance";
 
 const queryClient = new QueryClient();
 
