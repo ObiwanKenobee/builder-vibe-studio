@@ -73,6 +73,7 @@ function AppWithPWA() {
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/analytics" element={<Analytics />} />
               <Route path="/sanctum-map" element={<SanctumMap />} />
               <Route path="/library" element={<Library />} />
               <Route path="/dignity-coin" element={<DignityCoin />} />
