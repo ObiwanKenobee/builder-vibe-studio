@@ -401,6 +401,27 @@ export default function FloatingBanner() {
           </div>
         </div>
       )}
+
+      {/* Newsletter Preview Modal */}
+      {showPreview && (
+        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-background rounded-lg shadow-2xl max-w-4xl max-h-[90vh] overflow-y-auto relative">
+            <button
+              onClick={() => setShowPreview(false)}
+              className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-background/80 backdrop-blur flex items-center justify-center hover:bg-background transition-colors"
+            >
+              <X className="w-4 h-4 text-foreground/60" />
+            </button>
+            <div className="p-8">
+              <NewsletterPreview onSubscribe={() => {
+                setShowPreview(false);
+                setShowNewsletter(true);
+                setIsExpanded(true);
+              }} />
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
