@@ -1,0 +1,97 @@
+{
+  "name": "Atlas Sanctum - Regenerative Finance Platform",
+  "short_name": "Atlas Sanctum",
+  "description": "Transform capital into conscience and wealth into wisdom through regenerative finance and AI-powered insights.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F0F23",
+  "theme_color": "#D4AF37",
+  "orientation": "any",
+  "scope": "/",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["finance", "productivity", "utilities", "business"],
+  "screenshots": [
+    {
+      "src": "/screenshots/desktop-1.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "platform": "wide",
+      "label": "Atlas Sanctum Dashboard - Desktop View"
+    },
+    {
+      "src": "/screenshots/mobile-1.jpg", 
+      "sizes": "390x844",
+      "type": "image/jpeg",
+      "platform": "narrow",
+      "label": "Atlas Sanctum Map - Mobile View"
+    }
+  ],
+  "icons": [
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png", 
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180", 
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Sanctum Map",
+      "short_name": "Map",
+      "description": "Interactive 3D globe showing regenerative financial flows",
+      "url": "/sanctum-map",
+      "icons": [
+        {
+          "src": "/shortcuts/map-icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Pain Transmutation",
+      "short_name": "Transform",
+      "description": "Convert crisis into healing through AI",
+      "url": "/pain-transmutation", 
+      "icons": [
+        {
+          "src": "/shortcuts/transform-icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Fellowship",
+      "short_name": "Connect", 
+      "description": "Join regenerative custodians worldwide",
+      "url": "/fellowship",
+      "icons": [
+        {
+          "src": "/shortcuts/fellowship-icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}
