@@ -943,9 +943,120 @@ function AINarrativeDashboard() {
   );
 }
 
+function DataQualityDashboard() {
+  const metrics = generateMetrics();
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-3xl font-bold text-foreground">Data Ingestion & Quality Dashboard</h2>
+          <p className="text-foreground/70">Ensure clean, up-to-date data streams for finance and ecology</p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <MetricCard
+          title="Active Data Sources"
+          value="127"
+          change={{ value: "+8", positive: true }}
+          icon={Database}
+          color="atlas-cosmic"
+        />
+        <MetricCard
+          title="Data Freshness"
+          value={`${metrics.dataFreshness}%`}
+          change={{ value: "+2.1%", positive: true }}
+          icon={RefreshCw}
+          color="atlas-regenerative"
+        />
+        <MetricCard
+          title="Error Rate"
+          value="0.3%"
+          change={{ value: "-0.2%", positive: true }}
+          icon={AlertTriangle}
+          color="atlas-wisdom"
+        />
+        <MetricCard
+          title="Processing Volume"
+          value="2.4M"
+          change={{ value: "+340K", positive: true }}
+          icon={Activity}
+          color="atlas-gold"
+        />
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <Card className="border-border">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Database className="w-5 h-5 text-atlas-cosmic" />
+              Data Source Health
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {[
+                { source: "Financial APIs", status: "Healthy", freshness: 98 },
+                { source: "ESG Datasets", status: "Healthy", freshness: 94 },
+                { source: "Impact Metrics", status: "Warning", freshness: 89 },
+                { source: "Blockchain Data", status: "Healthy", freshness: 99 },
+              ].map((source) => (
+                <div key={source.source} className="flex justify-between items-center p-3 border border-border rounded-lg">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-2 h-2 rounded-full ${
+                      source.status === 'Healthy' ? 'bg-atlas-regenerative' : 'bg-yellow-500'
+                    }`} />
+                    <span className="font-medium text-foreground">{source.source}</span>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-sm font-medium text-foreground">{source.freshness}%</div>
+                    <div className={`text-xs ${
+                      source.status === 'Healthy' ? 'text-atlas-regenerative' : 'text-yellow-500'
+                    }`}>{source.status}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="border-border">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <BarChart3 className="w-5 h-5 text-atlas-wisdom" />
+              Data Quality Metrics
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {[
+                { metric: "Completeness", score: 96, target: 95 },
+                { metric: "Accuracy", score: 94, target: 98 },
+                { metric: "Consistency", score: 91, target: 90 },
+                { metric: "Timeliness", score: 98, target: 95 },
+              ].map((item) => (
+                <div key={item.metric} className="space-y-2">
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-foreground">{item.metric}</span>
+                    <span className={`text-sm font-medium ${
+                      item.score >= item.target ? 'text-atlas-regenerative' : 'text-yellow-500'
+                    }`}>{item.score}% (target: {item.target}%)</span>
+                  </div>
+                  <Progress value={item.score} className="h-2" />
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+}
+
 function PerformanceDashboard() {
   const metrics = generateMetrics();
-  
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -1081,6 +1192,312 @@ function PerformanceDashboard() {
   );
 }
 
+function SecurityDashboard() {
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-3xl font-bold text-foreground">Security & Compliance Dashboard</h2>
+          <p className="text-foreground/70">Monitor security events and compliance in multi-user environment</p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <MetricCard
+          title="Security Events"
+          value="0"
+          change={{ value: "No incidents", positive: true }}
+          icon={Shield}
+          color="atlas-regenerative"
+        />
+        <MetricCard
+          title="Failed Logins"
+          value="23"
+          change={{ value: "-12", positive: true }}
+          icon={AlertTriangle}
+          color="atlas-wisdom"
+        />
+        <MetricCard
+          title="Compliance Score"
+          value="98.7%"
+          change={{ value: "+1.2%", positive: true }}
+          icon={CheckCircle}
+          color="atlas-cosmic"
+        />
+        <MetricCard
+          title="Transaction Integrity"
+          value="100%"
+          change={{ value: "Perfect", positive: true }}
+          icon={Lock}
+          color="atlas-gold"
+        />
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <Card className="border-border">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Shield className="w-5 h-5 text-atlas-regenerative" />
+              Authentication Events
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {[
+                { type: "Successful Logins", count: 4672, percentage: 97.3 },
+                { type: "Failed Attempts", count: 23, percentage: 0.5 },
+                { type: "2FA Enabled", count: 4234, percentage: 88.2 },
+                { type: "Password Resets", count: 89, percentage: 1.9 },
+              ].map((item) => (
+                <div key={item.type} className="space-y-2">
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-foreground">{item.type}</span>
+                    <span className="text-sm font-medium text-foreground">{item.count} ({item.percentage}%)</span>
+                  </div>
+                  <Progress value={item.percentage > 10 ? item.percentage : 10} className="h-2" />
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="border-border">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Lock className="w-5 h-5 text-atlas-cosmic" />
+              Recent Security Activity
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-3">
+              {[
+                { event: "Security scan completed", severity: "Info", time: "5 min ago" },
+                { event: "Password policy updated", severity: "Info", time: "2 hours ago" },
+                { event: "Unusual login pattern detected", severity: "Low", time: "1 day ago" },
+                { event: "Compliance audit passed", severity: "Info", time: "2 days ago" },
+              ].map((item, index) => (
+                <div key={index} className="flex justify-between items-start p-3 bg-muted/30 rounded-lg">
+                  <div>
+                    <p className="font-medium text-foreground text-sm">{item.event}</p>
+                    <p className="text-foreground/60 text-xs">{item.time}</p>
+                  </div>
+                  <Badge variant={item.severity === "Info" ? "secondary" : "outline"}>
+                    {item.severity}
+                  </Badge>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+}
+
+function RevenueDashboard() {
+  const metrics = generateMetrics();
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-3xl font-bold text-foreground">Revenue & Client Dashboard</h2>
+          <p className="text-foreground/70">Track SaaS subscription revenue and client partnerships</p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <MetricCard
+          title="Monthly Recurring Revenue"
+          value={metrics.mrr}
+          change={{ value: "+€8.3K", positive: true }}
+          icon={DollarSign}
+          color="atlas-gold"
+        />
+        <MetricCard
+          title="Customer LTV"
+          value="€12,450"
+          change={{ value: "+€1,230", positive: true }}
+          icon={TrendingUp}
+          color="atlas-regenerative"
+        />
+        <MetricCard
+          title="Churn Rate"
+          value="2.1%"
+          change={{ value: "-0.8%", positive: true }}
+          icon={TrendingDown}
+          color="atlas-wisdom"
+        />
+        <MetricCard
+          title="Active Clients"
+          value="89"
+          change={{ value: "+12", positive: true }}
+          icon={Users}
+          color="atlas-cosmic"
+        />
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <Card className="border-border">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <PieChart className="w-5 h-5 text-atlas-gold" />
+              Revenue by Segment
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {[
+                { segment: "Custodian Pro", revenue: "€18.2K", percentage: 40 },
+                { segment: "Creator Studio", revenue: "€13.6K", percentage: 30 },
+                { segment: "NGO Partnership", revenue: "€9.1K", percentage: 20 },
+                { segment: "Enterprise", revenue: "€4.5K", percentage: 10 },
+              ].map((item) => (
+                <div key={item.segment} className="space-y-2">
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-foreground">{item.segment}</span>
+                    <span className="text-sm font-medium text-foreground">{item.revenue}</span>
+                  </div>
+                  <Progress value={item.percentage} className="h-2" />
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="border-border">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <TrendingUp className="w-5 h-5 text-atlas-regenerative" />
+              Growth Metrics
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {[
+                { metric: "Monthly Growth Rate", value: "+18.4%", trend: "Positive" },
+                { metric: "Customer Acquisition Cost", value: "€234", trend: "Decreasing" },
+                { metric: "Avg Deal Size", value: "€567", trend: "Increasing" },
+                { metric: "Time to Value", value: "12 days", trend: "Decreasing" },
+              ].map((item) => (
+                <div key={item.metric} className="flex justify-between items-center p-3 border border-border rounded-lg">
+                  <span className="font-medium text-foreground text-sm">{item.metric}</span>
+                  <div className="text-right">
+                    <div className="text-sm font-medium text-foreground">{item.value}</div>
+                    <div className="text-xs text-atlas-regenerative">{item.trend}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+}
+
+function SEODashboard() {
+  const metrics = generateMetrics();
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-3xl font-bold text-foreground">SEO/Acquisition Dashboard</h2>
+          <p className="text-foreground/70">Manage growth metrics for inbound traffic and conversions</p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <MetricCard
+          title="Organic Traffic"
+          value={metrics.organicTraffic}
+          change={{ value: "+23%", positive: true }}
+          icon={Search}
+          color="atlas-cosmic"
+        />
+        <MetricCard
+          title="Newsletter Signups"
+          value="2,847"
+          change={{ value: "+456", positive: true }}
+          icon={Users}
+          color="atlas-regenerative"
+        />
+        <MetricCard
+          title="Bounce Rate"
+          value="24.3%"
+          change={{ value: "-5.2%", positive: true }}
+          icon={TrendingDown}
+          color="atlas-wisdom"
+        />
+        <MetricCard
+          title="Avg Session Duration"
+          value="4:32"
+          change={{ value: "+1:15", positive: true }}
+          icon={Clock}
+          color="atlas-gold"
+        />
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <Card className="border-border">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <BarChart3 className="w-5 h-5 text-atlas-cosmic" />
+              Traffic Sources
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {[
+                { source: "Organic Search", visitors: 8934, percentage: 45 },
+                { source: "Direct", visitors: 5623, percentage: 28 },
+                { source: "Social Media", visitors: 3456, percentage: 17 },
+                { source: "Referrals", visitors: 1987, percentage: 10 },
+              ].map((item) => (
+                <div key={item.source} className="space-y-2">
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-foreground">{item.source}</span>
+                    <span className="text-sm font-medium text-foreground">{item.visitors.toLocaleString()}</span>
+                  </div>
+                  <Progress value={item.percentage} className="h-2" />
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="border-border">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Users className="w-5 h-5 text-atlas-regenerative" />
+              Engagement by Persona
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {[
+                { persona: "Custodians", engagement: 87, conversions: 156 },
+                { persona: "Creators", engagement: 92, conversions: 89 },
+                { persona: "Regenerators", engagement: 76, conversions: 67 },
+                { persona: "Citizens", engagement: 84, conversions: 234 },
+              ].map((item) => (
+                <div key={item.persona} className="space-y-2">
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-foreground">{item.persona}</span>
+                    <span className="text-sm font-medium text-foreground">{item.conversions} conversions</span>
+                  </div>
+                  <Progress value={item.engagement} className="h-2" />
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+}
+
 // Default dashboard content
 function DefaultDashboard() {
   return (
@@ -1172,5 +1589,5 @@ export default function Analytics() {
   );
 }
 
-// Missing import - add to the top
-import { Building, Award } from "lucide-react";
+// Missing imports
+import { Building, Award, Lock } from "lucide-react";
