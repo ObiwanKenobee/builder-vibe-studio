@@ -6,13 +6,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useUser, getPersonaConfig } from "@/contexts/UserContext";
 import { Link } from "react-router-dom";
-import { 
-  ArrowLeft, 
-  Sparkles, 
-  FileText, 
-  Music, 
-  Heart, 
-  Zap, 
+import SEOHead from "@/components/SEOHead";
+import {
+  ArrowLeft,
+  Sparkles,
+  FileText,
+  Music,
+  Heart,
+  Zap,
   Download,
   Share,
   Loader2,
