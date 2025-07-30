@@ -392,7 +392,7 @@ export default function FloatingBanner() {
 
       {/* Newsletter Prompt Overlay */}
       {showNewsletter && !isExpanded && (
-        <div className="fixed bottom-24 right-6 z-40">
+        <div className="fixed bottom-20 right-4 sm:bottom-24 sm:right-6 z-40 max-w-xs sm:max-w-none">
           <div className="bg-atlas-cosmic text-white px-3 py-2 rounded-lg text-xs shadow-lg animate-pulse">
             Do you want to receive the Map's monthly heartbeat?
             <div className="absolute bottom-0 right-4 transform translate-y-1">
