@@ -6,6 +6,8 @@ import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import SEOHead from "@/components/SEOHead";
 import { Link } from "react-router-dom";
+import PrivacyCompliance from "@/components/PrivacyCompliance";
+import SystemMonitoring from "@/components/SystemMonitoring";
 import {
   Globe,
   Coins,
