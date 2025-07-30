@@ -5,8 +5,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
-import { X, Globe, Sparkles, ArrowRight, Mail, Heart, Zap } from 'lucide-react';
+import { X, Globe, Sparkles, ArrowRight, Mail, Heart, Zap, Eye, BookOpen } from 'lucide-react';
 import * as THREE from 'three';
+import { NewsletterPreview } from './SanctumDispatch';
 
 // Animated Globe Component
 function AnimatedGlobe({ isHovered, userRegion }: { isHovered: boolean; userRegion: string }) {
