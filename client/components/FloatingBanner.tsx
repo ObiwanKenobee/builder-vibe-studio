@@ -277,6 +277,10 @@ export default function FloatingBanner() {
     setIsExpanded(true);
   };
 
+  const handlePreviewNewsletter = () => {
+    setShowPreview(true);
+  };
+
   return (
     <>
       {/* Main Floating Banner */}
