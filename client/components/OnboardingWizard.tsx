@@ -192,7 +192,12 @@ export default function OnboardingWizard() {
                             {config.title}
                           </h3>
                           {selectedPersona === persona && (
-                            <CheckCircle2 className={`w-5 h-5 text-${config.color}`} />
+                            <CheckCircle2 className={
+                              config.color === 'atlas-gold' ? 'w-5 h-5 text-atlas-gold' :
+                              config.color === 'atlas-cosmic' ? 'w-5 h-5 text-atlas-cosmic' :
+                              config.color === 'atlas-regenerative' ? 'w-5 h-5 text-atlas-regenerative' :
+                              'w-5 h-5 text-atlas-wisdom'
+                            } />
                           )}
                         </div>
                         <p className="text-foreground/70 mb-3">{config.description}</p>
