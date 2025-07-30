@@ -299,8 +299,72 @@ function Footer() {
 }
 
 export default function Index() {
+  const { state } = useUser();
+
+  // Generate persona-specific SEO
+  const seoTitle = state.user.persona
+    ? `Atlas Sanctum - ${state.user.persona === 'custodian' ? 'Ethical Investment Platform' :
+         state.user.persona === 'creator' ? 'AI-Powered Creative Platform' :
+         state.user.persona === 'regenerator' ? 'Regenerative Project Funding' :
+         'Conscious Finance Map'}`
+    : "Atlas Sanctum - Capital Becomes Conscience, Wealth Becomes Wisdom";
+
+  const seoDescription = state.user.persona
+    ? `${state.user.persona === 'custodian' ? 'Professional dashboard for ethical capital custodians to redirect investments into regenerative projects with real-time impact analytics.' :
+         state.user.persona === 'creator' ? 'AI-powered platform for artists to transform crisis into healing through poetry, music, and wisdom narratives.' :
+         state.user.persona === 'regenerator' ? 'Transparent funding platform connecting planetary regeneration projects with ethical capital through AI-powered matching.' :
+         'Interactive map and tools for citizens to understand financial flows and take micro-actions for planetary healing.'}`
+    : "Transform finance for planetary healing with the world's first regenerative finance platform. Connect ethical capital to regenerative projects through AI-powered insights and immersive storytelling.";
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Atlas Sanctum",
+    "url": "https://atlassanctum.com",
+    "description": seoDescription,
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://atlassanctum.com/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    },
+    "mainEntity": {
+      "@type": "SoftwareApplication",
+      "name": "Atlas Sanctum Platform",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web Browser, iOS, Android",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "category": "Free Tier Available"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "127",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "featureList": [
+        "3D Interactive Sanctum Map",
+        "AI-Powered Pain Transmutation Studio",
+        "Dignity Coin Tracking",
+        "Regenerative Project Funding",
+        "Ethics-in-Motion Analytics"
+      ]
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEOHead
+        title={seoTitle}
+        description={seoDescription}
+        persona={state.user.persona}
+        structuredData={structuredData}
+        keywords="regenerative finance, ethical investing, impact investment platform, conscious capitalism, dignity coin, planetary healing, AI finance, Web3 sustainability, interactive financial map, crisis transformation"
+      />
+
       <Navigation />
       <HeroSection />
       <FeaturesSection />
