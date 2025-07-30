@@ -177,7 +177,10 @@ export default function OnboardingWizard() {
                     onClick={() => handlePersonaSelect(persona)}
                     className={`w-full p-6 rounded-xl border-2 transition-all duration-200 text-left group ${
                       selectedPersona === persona
-                        ? `border-${config.color} bg-${config.color}/5`
+                        ? (config.color === 'atlas-gold' ? 'border-atlas-gold bg-atlas-gold/5' :
+                           config.color === 'atlas-cosmic' ? 'border-atlas-cosmic bg-atlas-cosmic/5' :
+                           config.color === 'atlas-regenerative' ? 'border-atlas-regenerative bg-atlas-regenerative/5' :
+                           'border-atlas-wisdom bg-atlas-wisdom/5')
                         : 'border-border hover:border-atlas-gold/50 hover:bg-atlas-gold/5'
                     }`}
                   >
