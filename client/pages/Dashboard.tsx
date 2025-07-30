@@ -4,13 +4,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Link } from "react-router-dom";
-import { 
-  Globe, 
-  Book, 
-  Coins, 
-  Users, 
-  Sparkles, 
-  TrendingUp, 
+import SEOHead, { generatePersonaStructuredData } from "@/components/SEOHead";
+import {
+  Globe,
+  Book,
+  Coins,
+  Users,
+  Sparkles,
+  TrendingUp,
   Heart,
   ArrowRight,
   Award,
