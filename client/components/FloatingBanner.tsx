@@ -214,6 +214,7 @@ export default function FloatingBanner() {
   const [isVisible, setIsVisible] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [showNewsletter, setShowNewsletter] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [headlineIndex, setHeadlineIndex] = useState(0);
   const [userRegion, setUserRegion] = useState('Global');
