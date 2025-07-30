@@ -239,7 +239,10 @@ Her transformation became a template others followed, proving that even the most
                     onClick={() => setSelectedType(type.id)}
                     className={`p-4 rounded-lg border-2 text-left transition-all ${
                       selectedType === type.id
-                        ? `border-${type.color} bg-${type.color}/5`
+                        ? (type.color === 'atlas-gold' ? 'border-atlas-gold bg-atlas-gold/5' :
+                           type.color === 'atlas-cosmic' ? 'border-atlas-cosmic bg-atlas-cosmic/5' :
+                           type.color === 'atlas-regenerative' ? 'border-atlas-regenerative bg-atlas-regenerative/5' :
+                           'border-atlas-wisdom bg-atlas-wisdom/5')
                         : 'border-border hover:border-atlas-gold/50'
                     }`}
                   >
