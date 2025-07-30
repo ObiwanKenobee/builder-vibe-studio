@@ -1,9 +1,12 @@
 import { Canvas } from "@react-three/fiber";
 import { Stars, OrbitControls } from "@react-three/drei";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, Globe, Book, Coins, Zap, Users, ArrowRight } from "lucide-react";
+import { ChevronDown, Globe, Book, Coins, Zap, Users, ArrowRight, Wallet } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useUser } from "@/contexts/UserContext";
+import WalletModal from "@/components/WalletModal";
+import OnboardingWizard from "@/components/OnboardingWizard";
 
 // Three.js constellation component
 function ConstellationBackground() {
