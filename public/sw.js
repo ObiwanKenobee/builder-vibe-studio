@@ -1,307 +1,511 @@
-const CACHE_NAME = "atlas-sanctum-v1.0.0";
-const STATIC_CACHE_NAME = "atlas-sanctum-static-v1.0.0";
-const DYNAMIC_CACHE_NAME = "atlas-sanctum-dynamic-v1.0.0";
+// Atlas Sanctum Service Worker - Production-Ready PWA Implementation
 
-// Core app shell resources
-const STATIC_ASSETS = [
-  "/",
-  "/manifest.json",
-  "/favicon.ico",
-  "/apple-touch-icon.png",
-  "/android-chrome-192x192.png",
-  "/android-chrome-512x512.png",
+const CACHE_NAME = 'atlas-sanctum-v1.0.0';
+const CACHE_VERSION = '1.0.0';
+
+// Cache strategies configuration
+const CACHE_STRATEGIES = {
+  images: { strategy: 'cacheFirst', maxAge: 7 * 24 * 60 * 60 * 1000 }, // 7 days
+  api: { strategy: 'networkFirst', maxAge: 60 * 1000 }, // 1 minute
+  static: { strategy: 'staleWhileRevalidate', maxAge: 24 * 60 * 60 * 1000 }, // 1 day
+  fonts: { strategy: 'cacheFirst', maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
+  analytics: { strategy: 'networkOnly' },
+};
+
+// Resources to cache on install
+const PRECACHE_RESOURCES = [
+  '/',
+  '/dashboard',
+  '/sanctum-map',
+  '/analytics',
+  '/library',
+  '/fellowship',
+  '/dignity-coin',
+  '/pain-transmutation',
+  '/manifest.json',
+  '/offline.html',
+  // Add critical CSS and JS files
+  '/client/global.css',
 ];
 
-// API and dynamic content patterns
-const DYNAMIC_PATTERNS = [
-  /^https:\/\/api\.atlassanctum\.com\//,
-  /^https:\/\/fonts\.googleapis\.com\//,
-  /^https:\/\/fonts\.gstatic\.com\//,
+// API endpoints for background sync
+const SYNC_ENDPOINTS = [
+  '/api/user/profile',
+  '/api/metrics/dashboard',
+  '/api/notifications',
 ];
 
-// Install event - cache static assets
-self.addEventListener("install", (event) => {
-  console.log("[SW] Installing Service Worker...");
+// Notification configurations
+const NOTIFICATION_CONFIG = {
+  badge: '/icons/badge-72x72.png',
+  icon: '/icons/icon-192x192.png',
+  vibrate: [100, 50, 100],
+  requireInteraction: false,
+  silent: false,
+};
 
-  event.waitUntil(
-    caches
-      .open(STATIC_CACHE_NAME)
-      .then((cache) => {
-        console.log("[SW] Caching static assets");
-        return cache.addAll(STATIC_ASSETS);
-      })
-      .then(() => {
-        console.log("[SW] Static assets cached successfully");
-        return self.skipWaiting();
-      })
-      .catch((error) => {
-        console.error("[SW] Failed to cache static assets:", error);
-      }),
-  );
-});
-
-// Activate event - clean up old caches
-self.addEventListener("activate", (event) => {
-  console.log("[SW] Activating Service Worker...");
-
-  event.waitUntil(
-    caches
-      .keys()
-      .then((cacheNames) => {
-        return Promise.all(
-          cacheNames.map((cacheName) => {
-            if (
-              cacheName !== STATIC_CACHE_NAME &&
-              cacheName !== DYNAMIC_CACHE_NAME &&
-              cacheName !== CACHE_NAME
-            ) {
-              console.log("[SW] Deleting old cache:", cacheName);
-              return caches.delete(cacheName);
-            }
-          }),
-        );
-      })
-      .then(() => {
-        console.log("[SW] Service Worker activated");
-        return self.clients.claim();
-      }),
-  );
-});
-
-// Fetch event - implement caching strategies
-self.addEventListener("fetch", (event) => {
-  const { request } = event;
-  const url = new URL(request.url);
-
-  // Skip non-GET requests
-  if (request.method !== "GET") {
-    return;
+class CacheManager {
+  constructor() {
+    this.strategies = CACHE_STRATEGIES;
   }
 
-  // Skip chrome-extension and other protocols
-  if (!url.protocol.startsWith("http")) {
-    return;
-  }
-
-  // Strategy 1: Network First for API calls (fresh data priority)
-  if (DYNAMIC_PATTERNS.some((pattern) => pattern.test(request.url))) {
-    event.respondWith(networkFirst(request, DYNAMIC_CACHE_NAME));
-    return;
-  }
-
-  // Strategy 2: Cache First for static assets (performance priority)
-  if (
-    request.destination === "image" ||
-    request.destination === "font" ||
-    request.destination === "style" ||
-    request.destination === "script"
-  ) {
-    event.respondWith(cacheFirst(request, STATIC_CACHE_NAME));
-    return;
-  }
-
-  // Strategy 3: Stale While Revalidate for HTML (balance of speed and freshness)
-  if (request.destination === "document") {
-    event.respondWith(staleWhileRevalidate(request, DYNAMIC_CACHE_NAME));
-    return;
-  }
-
-  // Default: Network First
-  event.respondWith(networkFirst(request, DYNAMIC_CACHE_NAME));
-});
-
-// Caching Strategies
-
-// Cache First - Use cache, fallback to network
-async function cacheFirst(request, cacheName) {
-  try {
+  async cacheFirst(request, cacheName) {
     const cache = await caches.open(cacheName);
     const cachedResponse = await cache.match(request);
-
+    
     if (cachedResponse) {
-      return cachedResponse;
+      // Check if cache is still valid
+      const cacheTime = new Date(cachedResponse.headers.get('sw-cache-time') || 0);
+      const strategy = this.getStrategy(request.url);
+      
+      if (Date.now() - cacheTime.getTime() < strategy.maxAge) {
+        return cachedResponse;
+      }
     }
 
-    const networkResponse = await fetch(request);
-
-    if (networkResponse.ok) {
-      cache.put(request, networkResponse.clone());
+    try {
+      const networkResponse = await fetch(request);
+      if (networkResponse.ok) {
+        const responseClone = networkResponse.clone();
+        const headers = new Headers(responseClone.headers);
+        headers.set('sw-cache-time', new Date().toISOString());
+        
+        const modifiedResponse = new Response(responseClone.body, {
+          status: responseClone.status,
+          statusText: responseClone.statusText,
+          headers: headers,
+        });
+        
+        cache.put(request, modifiedResponse);
+      }
+      return networkResponse;
+    } catch (error) {
+      return cachedResponse || this.getOfflineFallback(request);
     }
-
-    return networkResponse;
-  } catch (error) {
-    console.error("[SW] Cache First strategy failed:", error);
-    return new Response("Offline content not available", {
-      status: 503,
-      headers: { "Content-Type": "text/plain" },
-    });
   }
-}
 
-// Network First - Use network, fallback to cache
-async function networkFirst(request, cacheName) {
-  try {
-    const networkResponse = await fetch(request);
-
-    if (networkResponse.ok) {
-      const cache = await caches.open(cacheName);
-      cache.put(request, networkResponse.clone());
+  async networkFirst(request, cacheName) {
+    const cache = await caches.open(cacheName);
+    
+    try {
+      const networkResponse = await fetch(request);
+      if (networkResponse.ok) {
+        cache.put(request, networkResponse.clone());
+      }
+      return networkResponse;
+    } catch (error) {
+      const cachedResponse = await cache.match(request);
+      return cachedResponse || this.getOfflineFallback(request);
     }
+  }
 
-    return networkResponse;
-  } catch (error) {
-    console.log("[SW] Network failed, trying cache:", error.message);
-
+  async staleWhileRevalidate(request, cacheName) {
     const cache = await caches.open(cacheName);
     const cachedResponse = await cache.match(request);
 
-    if (cachedResponse) {
-      return cachedResponse;
-    }
-
-    return new Response("Content unavailable offline", {
-      status: 503,
-      headers: { "Content-Type": "text/plain" },
-    });
-  }
-}
-
-// Stale While Revalidate - Return cache immediately, update in background
-async function staleWhileRevalidate(request, cacheName) {
-  try {
-    const cache = await caches.open(cacheName);
-    const cachedResponse = await cache.match(request);
-
-    // Always try to update in background
-    const networkPromise = fetch(request)
-      .then((networkResponse) => {
+    // Always try to update cache in background
+    fetch(request)
+      .then(networkResponse => {
         if (networkResponse.ok) {
           cache.put(request, networkResponse.clone());
         }
-        return networkResponse;
       })
-      .catch((error) => {
-        console.log("[SW] Background update failed:", error.message);
-      });
+      .catch(() => {}); // Ignore network errors in background
 
-    // Return cached version immediately if available
-    if (cachedResponse) {
-      return cachedResponse;
+    return cachedResponse || fetch(request).catch(() => this.getOfflineFallback(request));
+  }
+
+  async networkOnly(request) {
+    return fetch(request).catch(() => this.getOfflineFallback(request));
+  }
+
+  getStrategy(url) {
+    if (url.includes('/api/')) return this.strategies.api;
+    if (url.match(/\.(png|jpg|jpeg|gif|webp|svg)$/)) return this.strategies.images;
+    if (url.match(/\.(woff|woff2|ttf|otf)$/)) return this.strategies.fonts;
+    if (url.includes('analytics') || url.includes('metrics')) return this.strategies.analytics;
+    return this.strategies.static;
+  }
+
+  async getOfflineFallback(request) {
+    if (request.destination === 'document') {
+      return caches.match('/offline.html');
+    }
+    
+    if (request.destination === 'image') {
+      return new Response(
+        '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="#f0f0f0"/><text x="50%" y="50%" text-anchor="middle" fill="#666">Offline</text></svg>',
+        { headers: { 'Content-Type': 'image/svg+xml' } }
+      );
     }
 
-    // If no cache, wait for network
-    return networkPromise;
-  } catch (error) {
-    console.error("[SW] Stale While Revalidate strategy failed:", error);
-    return new Response("Content unavailable", {
-      status: 503,
-      headers: { "Content-Type": "text/plain" },
+    return new Response('Offline', { status: 503 });
+  }
+}
+
+class BackgroundSyncManager {
+  constructor() {
+    this.syncQueue = [];
+    this.isOnline = navigator.onLine;
+  }
+
+  async addToQueue(data) {
+    this.syncQueue.push({
+      id: Date.now() + Math.random(),
+      data,
+      timestamp: Date.now(),
+      retries: 0,
+    });
+    
+    await this.saveQueue();
+    
+    if (this.isOnline) {
+      this.processSyncQueue();
+    }
+  }
+
+  async saveQueue() {
+    try {
+      const cache = await caches.open('sync-queue');
+      await cache.put('/sync-queue', new Response(JSON.stringify(this.syncQueue)));
+    } catch (error) {
+      console.warn('Failed to save sync queue:', error);
+    }
+  }
+
+  async loadQueue() {
+    try {
+      const cache = await caches.open('sync-queue');
+      const response = await cache.match('/sync-queue');
+      if (response) {
+        this.syncQueue = await response.json();
+      }
+    } catch (error) {
+      console.warn('Failed to load sync queue:', error);
+    }
+  }
+
+  async processSyncQueue() {
+    const processedItems = [];
+    
+    for (const item of this.syncQueue) {
+      try {
+        await this.processQueueItem(item);
+        processedItems.push(item.id);
+      } catch (error) {
+        item.retries++;
+        if (item.retries >= 3) {
+          processedItems.push(item.id);
+          console.warn('Max retries reached for sync item:', item);
+        }
+      }
+    }
+    
+    this.syncQueue = this.syncQueue.filter(item => !processedItems.includes(item.id));
+    await this.saveQueue();
+  }
+
+  async processQueueItem(item) {
+    const { endpoint, method = 'POST', data } = item.data;
+    
+    const response = await fetch(endpoint, {
+      method,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Sync failed: ${response.status}`);
+    }
+  }
+}
+
+class NotificationManager {
+  constructor() {
+    this.config = NOTIFICATION_CONFIG;
+  }
+
+  async showNotification(title, options = {}) {
+    const finalOptions = {
+      ...this.config,
+      ...options,
+      tag: options.tag || 'atlas-sanctum',
+      timestamp: Date.now(),
+    };
+
+    return self.registration.showNotification(title, finalOptions);
+  }
+
+  async handleNotificationClick(event) {
+    event.notification.close();
+    
+    const { action, data } = event.notification;
+    let targetUrl = '/';
+    
+    if (data?.url) {
+      targetUrl = data.url;
+    } else if (action) {
+      targetUrl = this.getActionUrl(action);
+    }
+
+    event.waitUntil(
+      clients.matchAll().then(clientList => {
+        // Check if app is already open
+        for (const client of clientList) {
+          if (client.url.includes(targetUrl) && 'focus' in client) {
+            return client.focus();
+          }
+        }
+        
+        // Open new window/tab
+        if (clients.openWindow) {
+          return clients.openWindow(targetUrl);
+        }
+      })
+    );
+  }
+
+  getActionUrl(action) {
+    const actionUrls = {
+      'view-dashboard': '/dashboard',
+      'view-analytics': '/analytics',
+      'view-map': '/sanctum-map',
+      'view-fellowship': '/fellowship',
+    };
+    
+    return actionUrls[action] || '/';
+  }
+
+  async schedulePeriodicNotifications() {
+    // Schedule daily engagement notifications
+    const now = new Date();
+    const tomorrow = new Date(now);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(9, 0, 0, 0); // 9 AM next day
+    
+    const delay = tomorrow.getTime() - now.getTime();
+    
+    setTimeout(() => {
+      this.showNotification('Atlas Sanctum Daily Update', {
+        body: 'Check your regenerative impact metrics and global flow updates',
+        icon: '/icons/icon-192x192.png',
+        badge: '/icons/badge-72x72.png',
+        actions: [
+          {
+            action: 'view-dashboard',
+            title: 'View Dashboard',
+            icon: '/icons/dashboard-32x32.png',
+          },
+          {
+            action: 'view-analytics',
+            title: 'View Analytics',
+            icon: '/icons/analytics-32x32.png',
+          },
+        ],
+        data: { url: '/dashboard' },
+      });
+    }, delay);
+  }
+}
+
+// Initialize managers
+const cacheManager = new CacheManager();
+const syncManager = new BackgroundSyncManager();
+const notificationManager = new NotificationManager();
+
+// Service Worker Event Listeners
+self.addEventListener('install', event => {
+  console.log('Atlas Sanctum SW: Installing version', CACHE_VERSION);
+  
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll(PRECACHE_RESOURCES);
+    }).then(() => {
+      return self.skipWaiting();
+    })
+  );
+});
+
+self.addEventListener('activate', event => {
+  console.log('Atlas Sanctum SW: Activating version', CACHE_VERSION);
+  
+  event.waitUntil(
+    Promise.all([
+      // Clean up old caches
+      caches.keys().then(cacheNames => {
+        return Promise.all(
+          cacheNames.map(cacheName => {
+            if (cacheName !== CACHE_NAME && cacheName.startsWith('atlas-sanctum-')) {
+              console.log('Deleting old cache:', cacheName);
+              return caches.delete(cacheName);
+            }
+          })
+        );
+      }),
+      // Load sync queue
+      syncManager.loadQueue(),
+      // Take control of all clients
+      self.clients.claim(),
+    ])
+  );
+});
+
+self.addEventListener('fetch', event => {
+  const { request } = event;
+  const url = new URL(request.url);
+  
+  // Skip non-GET requests and external URLs
+  if (request.method !== 'GET' || !url.origin.includes(self.location.origin)) {
+    return;
+  }
+
+  const strategy = cacheManager.getStrategy(request.url);
+  
+  event.respondWith(
+    (async () => {
+      switch (strategy.strategy) {
+        case 'cacheFirst':
+          return cacheManager.cacheFirst(request, CACHE_NAME);
+        case 'networkFirst':
+          return cacheManager.networkFirst(request, CACHE_NAME);
+        case 'staleWhileRevalidate':
+          return cacheManager.staleWhileRevalidate(request, CACHE_NAME);
+        case 'networkOnly':
+          return cacheManager.networkOnly(request);
+        default:
+          return cacheManager.staleWhileRevalidate(request, CACHE_NAME);
+      }
+    })()
+  );
+});
+
+// Background Sync
+self.addEventListener('sync', event => {
+  console.log('Background sync triggered:', event.tag);
+  
+  if (event.tag === 'atlas-sync') {
+    event.waitUntil(syncManager.processSyncQueue());
+  }
+});
+
+// Push Notifications
+self.addEventListener('push', event => {
+  let data = {};
+  
+  if (event.data) {
+    try {
+      data = event.data.json();
+    } catch (error) {
+      data = { title: event.data.text() };
+    }
+  }
+  
+  const title = data.title || 'Atlas Sanctum';
+  const options = {
+    body: data.body || 'New update available',
+    icon: data.icon || '/icons/icon-192x192.png',
+    badge: data.badge || '/icons/badge-72x72.png',
+    data: data.data || {},
+    actions: data.actions || [],
+    tag: data.tag || 'atlas-update',
+  };
+  
+  event.waitUntil(
+    notificationManager.showNotification(title, options)
+  );
+});
+
+// Notification Clicks
+self.addEventListener('notificationclick', event => {
+  notificationManager.handleNotificationClick(event);
+});
+
+// Notification Close
+self.addEventListener('notificationclose', event => {
+  console.log('Notification closed:', event.notification.tag);
+  
+  // Track notification engagement
+  if (event.notification.data?.trackClose) {
+    syncManager.addToQueue({
+      endpoint: '/api/analytics/notification-close',
+      data: {
+        tag: event.notification.tag,
+        timestamp: Date.now(),
+      },
     });
   }
-}
-
-// Background Sync for offline actions
-self.addEventListener("sync", (event) => {
-  console.log("[SW] Background sync triggered:", event.tag);
-
-  if (event.tag === "transmutation-sync") {
-    event.waitUntil(syncTransmutations());
-  }
-
-  if (event.tag === "analytics-sync") {
-    event.waitUntil(syncAnalytics());
-  }
 });
 
-// Sync offline transmutations when online
-async function syncTransmutations() {
-  try {
-    const cache = await caches.open(DYNAMIC_CACHE_NAME);
-    const offlineTransmutations = await cache.match("/offline-transmutations");
+// Online/Offline Status
+self.addEventListener('online', () => {
+  console.log('Back online - processing sync queue');
+  syncManager.isOnline = true;
+  syncManager.processSyncQueue();
+});
 
-    if (offlineTransmutations) {
-      const data = await offlineTransmutations.json();
+self.addEventListener('offline', () => {
+  console.log('Gone offline');
+  syncManager.isOnline = false;
+});
 
-      // Send to server when online
-      for (const transmutation of data) {
-        await fetch("/api/transmutations", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(transmutation),
-        });
+// Message handling from main thread
+self.addEventListener('message', event => {
+  const { type, data } = event.data;
+  
+  switch (type) {
+    case 'SKIP_WAITING':
+      self.skipWaiting();
+      break;
+      
+    case 'CACHE_STRATEGY':
+      if (data.strategy) {
+        Object.assign(cacheManager.strategies, data.strategy);
       }
-
-      // Clear offline storage
-      await cache.delete("/offline-transmutations");
-      console.log("[SW] Offline transmutations synced successfully");
-    }
-  } catch (error) {
-    console.error("[SW] Failed to sync transmutations:", error);
-  }
-}
-
-// Sync analytics data
-async function syncAnalytics() {
-  try {
-    const cache = await caches.open(DYNAMIC_CACHE_NAME);
-    const offlineAnalytics = await cache.match("/offline-analytics");
-
-    if (offlineAnalytics) {
-      const data = await offlineAnalytics.json();
-
-      // Send to analytics endpoint
-      await fetch("/api/analytics", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+      break;
+      
+    case 'ADD_TO_SYNC_QUEUE':
+      syncManager.addToQueue(data);
+      break;
+      
+    case 'SHOW_NOTIFICATION':
+      notificationManager.showNotification(data.title, data.options);
+      break;
+      
+    case 'GET_CACHE_SIZE':
+      caches.open(CACHE_NAME).then(cache => {
+        return cache.keys();
+      }).then(keys => {
+        event.ports[0].postMessage({ cacheSize: keys.length });
       });
-
-      await cache.delete("/offline-analytics");
-      console.log("[SW] Offline analytics synced successfully");
-    }
-  } catch (error) {
-    console.error("[SW] Failed to sync analytics:", error);
+      break;
+      
+    case 'CLEAR_CACHE':
+      caches.delete(CACHE_NAME).then(() => {
+        event.ports[0].postMessage({ cleared: true });
+      });
+      break;
   }
+});
+
+// Periodic Background Sync (if supported)
+if ('periodicSync' in self.registration) {
+  self.addEventListener('periodicsync', event => {
+    if (event.tag === 'atlas-sync') {
+      event.waitUntil(
+        Promise.all([
+          syncManager.processSyncQueue(),
+          // Update critical data
+          fetch('/api/user/sync').catch(() => {}),
+          fetch('/api/metrics/sync').catch(() => {}),
+        ])
+      );
+    }
+  });
 }
 
-// Push notification handling
-self.addEventListener("push", (event) => {
-  console.log("[SW] Push received:", event);
+// Initialize periodic notifications
+notificationManager.schedulePeriodicNotifications();
 
-  const options = {
-    body: event.data
-      ? event.data.text()
-      : "New content available in Atlas Sanctum",
-    icon: "/android-chrome-192x192.png",
-    badge: "/favicon-32x32.png",
-    vibrate: [200, 100, 200],
-    tag: "atlas-sanctum-notification",
-    actions: [
-      {
-        action: "open",
-        title: "Open Atlas Sanctum",
-        icon: "/android-chrome-192x192.png",
-      },
-      {
-        action: "close",
-        title: "Dismiss",
-        icon: "/favicon-32x32.png",
-      },
-    ],
-  };
-
-  event.waitUntil(self.registration.showNotification("Atlas Sanctum", options));
-});
-
-// Notification click handling
-self.addEventListener("notificationclick", (event) => {
-  console.log("[SW] Notification clicked:", event);
-
-  event.notification.close();
-
-  if (event.action === "open") {
-    event.waitUntil(clients.openWindow("/"));
-  }
-});
-
-console.log("[SW] Service Worker script loaded");
+console.log('Atlas Sanctum Service Worker loaded successfully');
