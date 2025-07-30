@@ -27,10 +27,12 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/sanctum-map" element={<SanctumMap />} />
             <Route path="/library" element={<Library />} />
             <Route path="/dignity-coin" element={<DignityCoin />} />
             <Route path="/fellowship" element={<Fellowship />} />
+            <Route path="/pain-transmutation" element={<PainTransmutation />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
