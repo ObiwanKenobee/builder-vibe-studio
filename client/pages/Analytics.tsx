@@ -1572,6 +1572,31 @@ export default function Analytics() {
         return <RevenueDashboard />;
       case "seo":
         return <SEODashboard />;
+      case "system-monitoring":
+        return <SystemMonitoring />;
+      case "privacy-compliance":
+        return (
+          <div className="space-y-6">
+            <div>
+              <h2 className="text-3xl font-bold text-foreground">Privacy & Compliance Management</h2>
+              <p className="text-foreground/70">Manage data privacy, consent, and regulatory compliance</p>
+            </div>
+            <div className="flex justify-end">
+              <PrivacyCompliance />
+            </div>
+            <Card className="border-border">
+              <CardHeader>
+                <CardTitle>Compliance Overview</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-foreground/60">
+                  Access comprehensive privacy and compliance management tools above.
+                  Monitor GDPR, CCPA, and other regulatory requirements in real-time.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        );
       default:
         return <DefaultDashboard />;
     }
