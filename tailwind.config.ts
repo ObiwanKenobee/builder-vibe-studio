@@ -57,6 +57,14 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // Atlas Sanctum custom colors
+        atlas: {
+          gold: "hsl(var(--atlas-gold))",
+          deep: "hsl(var(--atlas-deep))",
+          cosmic: "hsl(var(--atlas-cosmic))",
+          wisdom: "hsl(var(--atlas-wisdom))",
+          regenerative: "hsl(var(--atlas-regenerative))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
