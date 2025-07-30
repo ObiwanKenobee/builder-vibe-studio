@@ -247,7 +247,12 @@ Her transformation became a template others followed, proving that even the most
                     }`}
                   >
                     <div className="flex items-start gap-3">
-                      <type.icon className={`w-5 h-5 text-${type.color} mt-1`} />
+                      <type.icon className={`w-5 h-5 mt-1 ${
+                        type.color === 'atlas-gold' ? 'text-atlas-gold' :
+                        type.color === 'atlas-cosmic' ? 'text-atlas-cosmic' :
+                        type.color === 'atlas-regenerative' ? 'text-atlas-regenerative' :
+                        'text-atlas-wisdom'
+                      }`} />
                       <div>
                         <h3 className="font-medium text-foreground">{type.title}</h3>
                         <p className="text-sm text-foreground/60 mt-1">{type.example}</p>
