@@ -85,6 +85,13 @@ const workspaces = {
     path: "/advocacy",
     color: "atlas-cosmic",
   },
+  analytics: {
+    title: "Analytics Dashboard",
+    description: "Comprehensive metrics and operational insights",
+    icon: BarChart3,
+    path: "/analytics",
+    color: "atlas-wisdom",
+  },
 };
 
 function PersonaStats() {
