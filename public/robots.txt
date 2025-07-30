@@ -1,14 +1,88 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
+# Atlas Sanctum - Regenerative Finance Platform
+# Comprehensive crawling directives for optimal SEO indexing
 
 User-agent: *
 Allow: /
+
+# High-priority pages for indexing
+Allow: /sanctum-map
+Allow: /pain-transmutation
+Allow: /library
+Allow: /fellowship
+Allow: /dignity-coin
+
+# Persona-specific landing pages
+Allow: /custodian
+Allow: /creator  
+Allow: /regenerator
+Allow: /citizen
+
+# Important for local SEO and voice search
+Allow: /about
+Allow: /how-it-works
+Allow: /pricing
+Allow: /contact
+
+# Blog and content marketing URLs
+Allow: /blog/
+Allow: /guides/
+Allow: /case-studies/
+Allow: /research/
+
+# API documentation (for developer SEO)
+Allow: /api-docs
+Allow: /developers
+
+# Disallow private/admin areas
+Disallow: /admin/
+Disallow: /api/private/
+Disallow: /user/settings
+Disallow: /_internal/
+
+# Block common bot paths
+Disallow: /search?
+Disallow: /*?utm_
+Disallow: /*?ref=
+Disallow: /*?src=
+
+# Allow CSS, JS, and media for rich indexing
+Allow: /client/
+Allow: /assets/
+Allow: /*.css
+Allow: /*.js
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.gif
+Allow: /*.svg
+Allow: /*.webp
+Allow: /*.mp4
+Allow: /*.webm
+
+# Crawl delay for responsible crawling
+Crawl-delay: 1
+
+# Sitemaps for comprehensive indexing
+Sitemap: https://atlassanctum.com/sitemap.xml
+Sitemap: https://atlassanctum.com/sitemap-personas.xml
+Sitemap: https://atlassanctum.com/sitemap-content.xml
+
+# Google-specific directives
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing-specific directives  
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Block aggressive crawlers
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Disallow: /
