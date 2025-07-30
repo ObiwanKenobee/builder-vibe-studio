@@ -306,6 +306,11 @@ export default function Dashboard() {
   if (!state.user.isConnected || !state.user.onboardingComplete) {
     return (
       <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
+        <SEOHead
+          title="Complete Your Atlas Sanctum Setup - Regenerative Finance Dashboard"
+          description="Finish your onboarding to access your personalized regenerative finance dashboard with AI insights and impact tracking."
+          keywords="regenerative finance onboarding, ethical investment setup, impact dashboard access"
+        />
         <div className="text-center space-y-6">
           <div className="w-16 h-16 mx-auto rounded-full bg-atlas-gold/20 flex items-center justify-center">
             <Globe className="w-8 h-8 text-atlas-gold" />
@@ -326,8 +331,42 @@ export default function Dashboard() {
 
   const config = getPersonaConfig(state.user.persona);
 
+  // Generate persona-specific SEO
+  const seoTitle = `${config?.title} Dashboard - Atlas Sanctum ${state.user.persona === 'custodian' ? 'Investment Platform' :
+    state.user.persona === 'creator' ? 'Creative Studio' :
+    state.user.persona === 'regenerator' ? 'Project Portal' : 'Citizen Tools'}`;
+
+  const seoDescription = `Access your personalized ${config?.title.toLowerCase()} dashboard with ${
+    state.user.persona === 'custodian' ? 'portfolio regeneration analytics, impact investing tools, and Dignity Coin tracking' :
+    state.user.persona === 'creator' ? 'AI creation tools, wisdom library access, and pain transmutation studio' :
+    state.user.persona === 'regenerator' ? 'project funding dashboard, impact visualization, and investor matching' :
+    'micro-action tools, financial flow mapping, and community connection features'
+  }. Track your regenerative finance journey.`;
+
+  const structuredData = state.user.persona
+    ? generatePersonaStructuredData(state.user.persona)
+    : {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Atlas Sanctum Dashboard",
+        "description": seoDescription
+      };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEOHead
+        title={seoTitle}
+        description={seoDescription}
+        persona={state.user.persona}
+        structuredData={structuredData}
+        keywords={`${config?.title.toLowerCase()} dashboard, regenerative finance tracking, ${
+          state.user.persona === 'custodian' ? 'impact investing analytics, ethical portfolio management' :
+          state.user.persona === 'creator' ? 'AI art creation, wisdom curation tools' :
+          state.user.persona === 'regenerator' ? 'project funding platform, impact visualization' :
+          'citizen action tools, financial transparency'
+        }, atlas sanctum workspace`}
+      />
+
       {/* Navigation */}
       <nav className="border-b border-border bg-background/80 backdrop-blur-lg">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -335,7 +374,7 @@ export default function Dashboard() {
             <Globe className="h-8 w-8 text-atlas-gold" />
             <span className="text-2xl font-bold text-foreground">Atlas Sanctum</span>
           </Link>
-          
+
           <div className="flex items-center space-x-4">
             <div className="text-right">
               <p className="text-sm text-foreground/60">Welcome back</p>
@@ -353,14 +392,14 @@ export default function Dashboard() {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-6 py-8">
         {/* Header */}
-        <div className="mb-8">
+        <header className="mb-8">
           <h1 className="text-4xl font-bold text-foreground mb-2">
-            Your Regenerative Journey
+            Your Regenerative {config?.title} Journey
           </h1>
           <p className="text-lg text-foreground/70">
             {config?.description}
           </p>
-          
+
           {/* User Badges */}
           <div className="flex flex-wrap gap-2 mt-4">
             {state.user.badges.map((badge) => (
@@ -369,7 +408,7 @@ export default function Dashboard() {
               </Badge>
             ))}
           </div>
-        </div>
+        </header>
 
         {/* Stats */}
         <PersonaStats />
