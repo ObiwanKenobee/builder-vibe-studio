@@ -8,6 +8,7 @@ import { useUser } from "@/contexts/UserContext";
 import WalletModal from "@/components/WalletModal";
 import OnboardingWizard from "@/components/OnboardingWizard";
 import SEOHead from "@/components/SEOHead";
+import FloatingBanner from "@/components/FloatingBanner";
 
 // Three.js constellation component
 function ConstellationBackground() {
