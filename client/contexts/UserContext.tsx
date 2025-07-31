@@ -200,7 +200,7 @@ export function getPersonaConfig(persona: PersonaType) {
         "Redirect capital into regenerative, dignity-first investments",
       color: "atlas-gold",
       icon: "👑",
-      workspaces: ["sanctum-map", "dignity-coin", "fellowship", "reports"],
+      workspaces: ["sanctum-map", "dignity-coin", "biblical-foundations", "fellowship", "reports"],
       level: "custodian" as UserLevel,
     },
     creator: {
