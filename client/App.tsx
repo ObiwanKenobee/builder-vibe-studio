@@ -17,6 +17,7 @@ import Fellowship from "./pages/Fellowship";
 import Dashboard from "./pages/Dashboard";
 import PainTransmutation from "./pages/PainTransmutation";
 import Analytics from "./pages/Analytics";
+import BiblicalFoundations from "./pages/BiblicalFoundations";
 import { useEffect } from "react";
 import { initializePerformanceOptimizations } from "@/lib/performance";
 
