@@ -385,10 +385,11 @@ function BiblicalFoundationsHighlight() {
       </CardHeader>
       <CardContent className="space-y-4">
         <p className="text-foreground/80 text-sm leading-relaxed">
-          Atlas Sanctum is built on biblical principles of justice, mercy, truth, 
-          stewardship, and creation care. Experience finance as God intended.
+          Atlas Sanctum is built on biblical principles of justice, mercy,
+          truth, stewardship, and creation care. Experience finance as God
+          intended.
         </p>
-        
+
         <div className="grid grid-cols-2 gap-4 text-xs">
           <div className="space-y-1">
             <div className="flex items-center gap-1">
@@ -413,7 +414,10 @@ function BiblicalFoundationsHighlight() {
         </div>
 
         <Link to="/biblical-foundations">
-          <Button size="sm" className="w-full bg-atlas-gold hover:bg-atlas-gold/90 text-atlas-deep">
+          <Button
+            size="sm"
+            className="w-full bg-atlas-gold hover:bg-atlas-gold/90 text-atlas-deep"
+          >
             Explore Biblical Foundations
             <ArrowRight className="w-3 h-3 ml-2" />
           </Button>

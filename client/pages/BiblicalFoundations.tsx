@@ -41,20 +41,22 @@ const biblicalPillars = [
     subtitle: "Genesis 2:15 - 'Work it and take care of it'",
     icon: Leaf,
     color: "atlas-regenerative",
-    description: "Capital flows prioritize healing nature and wildlife before profit. Every transaction has a stewardship index.",
-    verse: "The Lord God took the man and put him in the Garden of Eden to work it and take care of it.",
+    description:
+      "Capital flows prioritize healing nature and wildlife before profit. Every transaction has a stewardship index.",
+    verse:
+      "The Lord God took the man and put him in the Garden of Eden to work it and take care of it.",
     metrics: {
       stewardshipIndex: 87.3,
       natureHealingProjects: 156,
       carbonOffset: "2.4M tons",
-      biodiversityImpact: 94.2
+      biodiversityImpact: 94.2,
     },
     features: [
       "Real-time environmental impact scoring",
       "Automatic wildlife protection allocation",
       "Regenerative project priority routing",
-      "Ecosystem restoration tracking"
-    ]
+      "Ecosystem restoration tracking",
+    ],
   },
   {
     id: "truth",
@@ -62,20 +64,21 @@ const biblicalPillars = [
     subtitle: "John 8:32 - 'The truth will set you free'",
     icon: Eye,
     color: "atlas-wisdom",
-    description: "All data on the map is transparent, immutable, and traceable. No hidden flows, no manipulation—truth as a foundational service.",
+    description:
+      "All data on the map is transparent, immutable, and traceable. No hidden flows, no manipulation—truth as a foundational service.",
     verse: "Then you will know the truth, and the truth will set you free.",
     metrics: {
       transparencyScore: 99.8,
       immutableRecords: "847K",
       verifiedTransactions: 100,
-      auditTrails: "Complete"
+      auditTrails: "Complete",
     },
     features: [
       "Blockchain-verified transaction records",
       "Real-time data validation",
       "Public audit capabilities",
-      "Zero hidden flow tolerance"
-    ]
+      "Zero hidden flow tolerance",
+    ],
   },
   {
     id: "justice",
@@ -83,20 +86,22 @@ const biblicalPillars = [
     subtitle: "Amos 5:24 - 'Let justice roll on like a river'",
     icon: Scale,
     color: "atlas-cosmic",
-    description: "System continuously identifies where harm is occurring and redirects resources automatically towards repairing injustice.",
-    verse: "But let justice roll on like a river, righteousness like a never-failing stream!",
+    description:
+      "System continuously identifies where harm is occurring and redirects resources automatically towards repairing injustice.",
+    verse:
+      "But let justice roll on like a river, righteousness like a never-failing stream!",
     metrics: {
       justiceScore: 91.7,
       exploitationAlerts: 23,
       resourceRedirection: "€2.1M",
-      injusticeRepaired: 78
+      injusticeRepaired: 78,
     },
     features: [
       "Exploitation detection algorithms",
       "Automatic harm prevention",
       "Justice-based resource allocation",
-      "Community protection protocols"
-    ]
+      "Community protection protocols",
+    ],
   },
   {
     id: "reconciliation",
@@ -104,20 +109,22 @@ const biblicalPillars = [
     subtitle: "2 Corinthians 5:18 - 'Ministry of reconciliation'",
     icon: Heart,
     color: "atlas-gold",
-    description: "Converts conflict into covenant through AI storytelling, restorative economic covenants, and community rituals.",
-    verse: "All this is from God, who reconciled us to himself through Christ and gave us the ministry of reconciliation.",
+    description:
+      "Converts conflict into covenant through AI storytelling, restorative economic covenants, and community rituals.",
+    verse:
+      "All this is from God, who reconciled us to himself through Christ and gave us the ministry of reconciliation.",
     metrics: {
       conflictsResolved: 342,
       covenantsCreated: 89,
       healingRituals: 567,
-      communityBonds: 94.5
+      communityBonds: 94.5,
     },
     features: [
       "Conflict transformation algorithms",
       "Healing narrative generation",
       "Restorative covenant creation",
-      "Community ritual facilitation"
-    ]
+      "Community ritual facilitation",
+    ],
   },
   {
     id: "creation",
@@ -125,21 +132,23 @@ const biblicalPillars = [
     subtitle: "Psalm 19:1 - 'The heavens declare the glory of God'",
     icon: TreePine,
     color: "atlas-regenerative",
-    description: "Wildlife and ecosystems have voice and representation. Nature becomes a stakeholder with agency, not a passive resource.",
-    verse: "The heavens declare the glory of God; the skies proclaim the work of his hands.",
+    description:
+      "Wildlife and ecosystems have voice and representation. Nature becomes a stakeholder with agency, not a passive resource.",
+    verse:
+      "The heavens declare the glory of God; the skies proclaim the work of his hands.",
     metrics: {
       ecosystemVoices: 1247,
       speciesRepresented: 3456,
       habitatHealth: 89.3,
-      creationTestimony: "Active"
+      creationTestimony: "Active",
     },
     features: [
       "IoT ecosystem monitoring",
       "Wildlife voice translation",
       "Habitat health scoring",
-      "Species advocacy protocols"
-    ]
-  }
+      "Species advocacy protocols",
+    ],
+  },
 ];
 
 const architectureLayers = [
@@ -147,59 +156,97 @@ const architectureLayers = [
     id: "spirit",
     title: "Spirit-led Intent",
     icon: Crown,
-    description: "Purpose-based algorithms guided by biblical ethics: Mercy > Profit, Restoration > Extraction, Service > Domination",
-    principles: ["Mercy over Profit", "Restoration over Extraction", "Service over Domination", "Love over Fear"],
+    description:
+      "Purpose-based algorithms guided by biblical ethics: Mercy > Profit, Restoration > Extraction, Service > Domination",
+    principles: [
+      "Mercy over Profit",
+      "Restoration over Extraction",
+      "Service over Domination",
+      "Love over Fear",
+    ],
     status: "Active",
-    coverage: 100
+    coverage: 100,
   },
   {
     id: "fellowship",
     title: "Human Fellowship",
     icon: Users,
-    description: "A global circle modeled after Acts 2: Shared resources, radical generosity, training in wisdom + tech + stewardship",
-    principles: ["Shared Resources", "Radical Generosity", "Wisdom Training", "Collective Stewardship"],
+    description:
+      "A global circle modeled after Acts 2: Shared resources, radical generosity, training in wisdom + tech + stewardship",
+    principles: [
+      "Shared Resources",
+      "Radical Generosity",
+      "Wisdom Training",
+      "Collective Stewardship",
+    ],
     status: "Growing",
-    coverage: 78
+    coverage: 78,
   },
   {
     id: "creation",
     title: "Creation Data Mesh",
     icon: Globe,
-    description: "Wildlife, forests, oceans are sensed and heard: IoT + AI interprets these signals as non-human needs",
-    principles: ["Ecosystem Monitoring", "Species Advocacy", "Habitat Protection", "Natural Voice"],
+    description:
+      "Wildlife, forests, oceans are sensed and heard: IoT + AI interprets these signals as non-human needs",
+    principles: [
+      "Ecosystem Monitoring",
+      "Species Advocacy",
+      "Habitat Protection",
+      "Natural Voice",
+    ],
     status: "Expanding",
-    coverage: 62
+    coverage: 62,
   },
   {
     id: "regenerative",
     title: "Regenerative Intelligence",
     icon: Lightbulb,
-    description: "Artificial Regenerative Intelligence (ARI): Algorithms optimized for long-term flourishing, not just efficiency",
-    principles: ["Long-term Thinking", "Holistic Optimization", "Life-Centered Design", "Ethical Learning"],
+    description:
+      "Artificial Regenerative Intelligence (ARI): Algorithms optimized for long-term flourishing, not just efficiency",
+    principles: [
+      "Long-term Thinking",
+      "Holistic Optimization",
+      "Life-Centered Design",
+      "Ethical Learning",
+    ],
     status: "Evolving",
-    coverage: 85
-  }
+    coverage: 85,
+  },
 ];
 
-function BiblicalPillarCard({ pillar }: { pillar: typeof biblicalPillars[0] }) {
+function BiblicalPillarCard({
+  pillar,
+}: {
+  pillar: (typeof biblicalPillars)[0];
+}) {
   const IconComponent = pillar.icon;
-  
+
   return (
     <Card className="border-border hover:border-atlas-gold/50 transition-all duration-300 group">
       <CardHeader>
         <div className="flex items-start justify-between">
-          <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${
-            pillar.color === "atlas-gold" ? "bg-atlas-gold/20" :
-            pillar.color === "atlas-cosmic" ? "bg-atlas-cosmic/20" :
-            pillar.color === "atlas-regenerative" ? "bg-atlas-regenerative/20" :
-            "bg-atlas-wisdom/20"
-          }`}>
-            <IconComponent className={`w-6 h-6 ${
-              pillar.color === "atlas-gold" ? "text-atlas-gold" :
-              pillar.color === "atlas-cosmic" ? "text-atlas-cosmic" :
-              pillar.color === "atlas-regenerative" ? "text-atlas-regenerative" :
-              "text-atlas-wisdom"
-            }`} />
+          <div
+            className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${
+              pillar.color === "atlas-gold"
+                ? "bg-atlas-gold/20"
+                : pillar.color === "atlas-cosmic"
+                  ? "bg-atlas-cosmic/20"
+                  : pillar.color === "atlas-regenerative"
+                    ? "bg-atlas-regenerative/20"
+                    : "bg-atlas-wisdom/20"
+            }`}
+          >
+            <IconComponent
+              className={`w-6 h-6 ${
+                pillar.color === "atlas-gold"
+                  ? "text-atlas-gold"
+                  : pillar.color === "atlas-cosmic"
+                    ? "text-atlas-cosmic"
+                    : pillar.color === "atlas-regenerative"
+                      ? "text-atlas-regenerative"
+                      : "text-atlas-wisdom"
+              }`}
+            />
           </div>
           <Badge variant="secondary" className="text-xs">
             {pillar.id.toUpperCase()}
@@ -216,26 +263,29 @@ function BiblicalPillarCard({ pillar }: { pillar: typeof biblicalPillars[0] }) {
         <p className="text-foreground/80 leading-relaxed">
           {pillar.description}
         </p>
-        
+
         <div className="p-4 bg-muted/30 rounded-lg border-l-4 border-atlas-gold">
-          <p className="text-sm italic text-foreground/90">
-            "{pillar.verse}"
-          </p>
+          <p className="text-sm italic text-foreground/90">"{pillar.verse}"</p>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           {Object.entries(pillar.metrics).map(([key, value]) => (
             <div key={key} className="text-center">
-              <div className={`text-2xl font-bold ${
-                pillar.color === "atlas-gold" ? "text-atlas-gold" :
-                pillar.color === "atlas-cosmic" ? "text-atlas-cosmic" :
-                pillar.color === "atlas-regenerative" ? "text-atlas-regenerative" :
-                "text-atlas-wisdom"
-              }`}>
+              <div
+                className={`text-2xl font-bold ${
+                  pillar.color === "atlas-gold"
+                    ? "text-atlas-gold"
+                    : pillar.color === "atlas-cosmic"
+                      ? "text-atlas-cosmic"
+                      : pillar.color === "atlas-regenerative"
+                        ? "text-atlas-regenerative"
+                        : "text-atlas-wisdom"
+                }`}
+              >
                 {value}
               </div>
               <div className="text-xs text-foreground/60 capitalize">
-                {key.replace(/([A-Z])/g, ' $1').trim()}
+                {key.replace(/([A-Z])/g, " $1").trim()}
               </div>
             </div>
           ))}
@@ -244,7 +294,10 @@ function BiblicalPillarCard({ pillar }: { pillar: typeof biblicalPillars[0] }) {
         <div className="space-y-2">
           <h4 className="font-semibold text-foreground">Key Features:</h4>
           {pillar.features.map((feature, index) => (
-            <div key={index} className="flex items-center gap-2 text-sm text-foreground/70">
+            <div
+              key={index}
+              className="flex items-center gap-2 text-sm text-foreground/70"
+            >
               <div className="w-1.5 h-1.5 bg-atlas-gold rounded-full" />
               {feature}
             </div>
@@ -255,9 +308,13 @@ function BiblicalPillarCard({ pillar }: { pillar: typeof biblicalPillars[0] }) {
   );
 }
 
-function ArchitectureLayerCard({ layer }: { layer: typeof architectureLayers[0] }) {
+function ArchitectureLayerCard({
+  layer,
+}: {
+  layer: (typeof architectureLayers)[0];
+}) {
   const IconComponent = layer.icon;
-  
+
   return (
     <Card className="border-border">
       <CardHeader>
@@ -267,12 +324,17 @@ function ArchitectureLayerCard({ layer }: { layer: typeof architectureLayers[0] 
           </div>
           <div className="flex-1">
             <CardTitle className="text-lg">{layer.title}</CardTitle>
-            <Badge variant={layer.status === "Active" ? "default" : "secondary"} className="text-xs">
+            <Badge
+              variant={layer.status === "Active" ? "default" : "secondary"}
+              className="text-xs"
+            >
               {layer.status}
             </Badge>
           </div>
           <div className="text-right">
-            <div className="text-lg font-bold text-atlas-cosmic">{layer.coverage}%</div>
+            <div className="text-lg font-bold text-atlas-cosmic">
+              {layer.coverage}%
+            </div>
             <div className="text-xs text-foreground/60">Coverage</div>
           </div>
         </div>
@@ -281,14 +343,17 @@ function ArchitectureLayerCard({ layer }: { layer: typeof architectureLayers[0] 
         <p className="text-foreground/80 text-sm leading-relaxed">
           {layer.description}
         </p>
-        
+
         <div className="space-y-2">
           <Progress value={layer.coverage} className="h-2" />
         </div>
 
         <div className="grid grid-cols-2 gap-2">
           {layer.principles.map((principle, index) => (
-            <div key={index} className="flex items-center gap-2 text-xs text-foreground/70">
+            <div
+              key={index}
+              className="flex items-center gap-2 text-xs text-foreground/70"
+            >
               <div className="w-1 h-1 bg-atlas-cosmic rounded-full" />
               {principle}
             </div>
@@ -307,14 +372,17 @@ function NewJerusalemVision() {
           <Church className="w-8 h-8 text-atlas-gold" />
           <div>
             <CardTitle className="text-2xl">The New Jerusalem Vision</CardTitle>
-            <p className="text-foreground/70">Revelation 21 - Digital Rehearsal for Heaven's Economy</p>
+            <p className="text-foreground/70">
+              Revelation 21 - Digital Rehearsal for Heaven's Economy
+            </p>
           </div>
         </div>
       </CardHeader>
       <CardContent className="space-y-6">
         <p className="text-foreground/90 leading-relaxed">
-          "On earth as it is in heaven." (Matthew 6:10) - Atlas Sanctum becomes a digital rehearsal 
-          for heaven's economy: an economy of justice, mercy, and wisdom.
+          "On earth as it is in heaven." (Matthew 6:10) - Atlas Sanctum becomes
+          a digital rehearsal for heaven's economy: an economy of justice,
+          mercy, and wisdom.
         </p>
 
         <div className="grid md:grid-cols-3 gap-6">
@@ -324,7 +392,8 @@ function NewJerusalemVision() {
               <h4 className="font-semibold">Rivers of Living Water</h4>
             </div>
             <p className="text-sm text-foreground/70">
-              Financial flows that heal ecosystems and restore creation's original design
+              Financial flows that heal ecosystems and restore creation's
+              original design
             </p>
           </div>
 
@@ -334,7 +403,8 @@ function NewJerusalemVision() {
               <h4 className="font-semibold">Leaves for Healing</h4>
             </div>
             <p className="text-sm text-foreground/70">
-              Cultural wisdom and indigenous narratives stored in the Library for the healing of nations
+              Cultural wisdom and indigenous narratives stored in the Library
+              for the healing of nations
             </p>
           </div>
 
@@ -344,16 +414,20 @@ function NewJerusalemVision() {
               <h4 className="font-semibold">God Among People</h4>
             </div>
             <p className="text-sm text-foreground/70">
-              Platform removes barriers, focuses on direct connection and restoration
+              Platform removes barriers, focuses on direct connection and
+              restoration
             </p>
           </div>
         </div>
 
         <div className="p-4 bg-atlas-gold/10 rounded-lg border border-atlas-gold/20">
-          <h4 className="font-semibold text-atlas-gold mb-2">Beyond Consciousness Implementation</h4>
+          <h4 className="font-semibold text-atlas-gold mb-2">
+            Beyond Consciousness Implementation
+          </h4>
           <p className="text-sm text-foreground/80">
-            Instead of man-centered AI, our architecture recognizes God as the source of wisdom, 
-            models systems after God's revealed purposes, and aligns innovation with reconciliation and restoration.
+            Instead of man-centered AI, our architecture recognizes God as the
+            source of wisdom, models systems after God's revealed purposes, and
+            aligns innovation with reconciliation and restoration.
           </p>
         </div>
       </CardContent>
@@ -379,7 +453,8 @@ function HolisticKPIs() {
           Holistic Kingdom KPIs
         </CardTitle>
         <p className="text-foreground/70">
-          Metrics measuring justice, shalom (peace), and restoration, not just ROI
+          Metrics measuring justice, shalom (peace), and restoration, not just
+          ROI
         </p>
       </CardHeader>
       <CardContent>
@@ -422,14 +497,22 @@ export default function BiblicalFoundations() {
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-2">
             <Plus className="h-6 w-6 text-atlas-gold" />
-            <span className="text-lg font-bold text-foreground">Biblical Foundations</span>
+            <span className="text-lg font-bold text-foreground">
+              Biblical Foundations
+            </span>
           </Link>
-          
+
           <div className="flex items-center space-x-4">
-            <Link to="/analytics" className="text-foreground/70 hover:text-atlas-gold transition-colors">
+            <Link
+              to="/analytics"
+              className="text-foreground/70 hover:text-atlas-gold transition-colors"
+            >
               Analytics
             </Link>
-            <Link to="/dashboard" className="text-foreground/70 hover:text-atlas-gold transition-colors">
+            <Link
+              to="/dashboard"
+              className="text-foreground/70 hover:text-atlas-gold transition-colors"
+            >
               Dashboard
             </Link>
           </div>
@@ -449,8 +532,9 @@ export default function BiblicalFoundations() {
             </span>
           </h1>
           <p className="text-xl text-foreground/80 max-w-4xl mx-auto leading-relaxed">
-            Atlas Sanctum is built on the solid foundation of God's character, implementing biblical principles 
-            of justice, mercy, truth, stewardship, and creation care in every algorithm and interface.
+            Atlas Sanctum is built on the solid foundation of God's character,
+            implementing biblical principles of justice, mercy, truth,
+            stewardship, and creation care in every algorithm and interface.
           </p>
         </div>
 
@@ -461,10 +545,11 @@ export default function BiblicalFoundations() {
               Five Biblical Pillars
             </h2>
             <p className="text-foreground/70 max-w-3xl mx-auto">
-              Each pillar represents a core aspect of God's character implemented as functional system architecture
+              Each pillar represents a core aspect of God's character
+              implemented as functional system architecture
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {biblicalPillars.map((pillar) => (
               <BiblicalPillarCard key={pillar.id} pillar={pillar} />
@@ -479,10 +564,11 @@ export default function BiblicalFoundations() {
               Four Layers of Architecture
             </h2>
             <p className="text-foreground/70 max-w-3xl mx-auto">
-              Systematic implementation from divine intent to practical regenerative intelligence
+              Systematic implementation from divine intent to practical
+              regenerative intelligence
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 gap-6">
             {architectureLayers.map((layer) => (
               <ArchitectureLayerCard key={layer.id} layer={layer} />
@@ -503,18 +589,25 @@ export default function BiblicalFoundations() {
               Join the Kingdom Economy Revolution
             </h3>
             <p className="text-foreground/80 mb-8 max-w-2xl mx-auto">
-              Experience finance as God intended: just, merciful, truth-filled, and restorative. 
-              Be part of building heaven's economy on earth.
+              Experience finance as God intended: just, merciful, truth-filled,
+              and restorative. Be part of building heaven's economy on earth.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/dashboard">
-                <Button size="lg" className="bg-atlas-gold hover:bg-atlas-gold/90 text-atlas-deep">
+                <Button
+                  size="lg"
+                  className="bg-atlas-gold hover:bg-atlas-gold/90 text-atlas-deep"
+                >
                   Enter the Sanctum
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </Link>
               <Link to="/fellowship">
-                <Button size="lg" variant="outline" className="border-atlas-cosmic text-atlas-cosmic hover:bg-atlas-cosmic/10">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-atlas-cosmic text-atlas-cosmic hover:bg-atlas-cosmic/10"
+                >
                   Join the Fellowship
                 </Button>
               </Link>
