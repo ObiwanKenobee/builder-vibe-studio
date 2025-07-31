@@ -27,5 +27,13 @@ export function createServer() {
 
   app.get("/api/demo", handleDemo);
 
+  // Biblical Foundations API routes
+  app.get("/api/biblical-foundations/overview", getBiblicalFoundationsOverview);
+  app.get("/api/biblical-foundations/stewardship", getStewardshipMetrics);
+  app.get("/api/biblical-foundations/reconciliation", getReconciliationMetrics);
+  app.get("/api/biblical-foundations/justice", getJusticeMetrics);
+  app.get("/api/biblical-foundations/creation-voice", getCreationVoiceMetrics);
+  app.get("/api/biblical-foundations/truth-transparency", getTruthTransparencyMetrics);
+
   return app;
 }
