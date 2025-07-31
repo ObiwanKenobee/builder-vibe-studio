@@ -363,7 +363,7 @@ function NewJerusalemVision() {
 
 function HolisticKPIs() {
   const kpis = [
-    { name: "Shalom Index", value: 87.3, target: 95, icon: Dove },
+    { name: "Shalom Index", value: 87.3, target: 95, icon: Bird },
     { name: "Justice Score", value: 91.7, target: 100, icon: Scale },
     { name: "Restoration Rate", value: 78.9, target: 90, icon: TreePine },
     { name: "Mercy Quotient", value: 94.2, target: 98, icon: Heart },
