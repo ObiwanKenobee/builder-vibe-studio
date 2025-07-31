@@ -97,7 +97,7 @@ const workspaces = {
   "biblical-foundations": {
     title: "Biblical Foundations",
     description: "Kingdom economics built on God's character blueprint",
-    icon: Cross,
+    icon: Plus,
     path: "/biblical-foundations",
     color: "atlas-gold",
   },
