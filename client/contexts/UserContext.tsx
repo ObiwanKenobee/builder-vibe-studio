@@ -208,7 +208,7 @@ export function getPersonaConfig(persona: PersonaType) {
       description: "Share wisdom and co-create narratives for ethical finance",
       color: "atlas-cosmic",
       icon: "🎨",
-      workspaces: ["library", "pain-transmutation", "fellowship", "narratives"],
+      workspaces: ["library", "pain-transmutation", "biblical-foundations", "fellowship", "narratives"],
       level: "steward" as UserLevel,
     },
     regenerator: {
