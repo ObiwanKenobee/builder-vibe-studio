@@ -216,7 +216,7 @@ export function getPersonaConfig(persona: PersonaType) {
       description: "Get visibility and funding for regenerative projects",
       color: "atlas-regenerative",
       icon: "🌱",
-      workspaces: ["sanctum-map", "project-portal", "fellowship", "showcase"],
+      workspaces: ["sanctum-map", "project-portal", "biblical-foundations", "fellowship", "showcase"],
       level: "steward" as UserLevel,
     },
     citizen: {
