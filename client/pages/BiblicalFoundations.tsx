@@ -421,7 +421,7 @@ export default function BiblicalFoundations() {
       <nav className="border-b border-border bg-background/80 backdrop-blur-lg sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-2">
-            <Cross className="h-6 w-6 text-atlas-gold" />
+            <Plus className="h-6 w-6 text-atlas-gold" />
             <span className="text-lg font-bold text-foreground">Biblical Foundations</span>
           </Link>
           
