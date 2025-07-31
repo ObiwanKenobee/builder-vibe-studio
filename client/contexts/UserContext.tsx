@@ -227,6 +227,7 @@ export function getPersonaConfig(persona: PersonaType) {
       workspaces: [
         "sanctum-map",
         "pain-transmutation",
+        "biblical-foundations",
         "micro-dashboard",
         "advocacy",
       ],
