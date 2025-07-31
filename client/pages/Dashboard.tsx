@@ -18,7 +18,7 @@ import {
   Target,
   BarChart3,
   Zap,
-  Cross,
+  Plus,
   Crown,
 } from "lucide-react";
 
