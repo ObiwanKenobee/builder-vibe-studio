@@ -18,6 +18,8 @@ import {
   Target,
   BarChart3,
   Zap,
+  Plus,
+  Crown,
 } from "lucide-react";
 
 // Workspace definitions
@@ -84,6 +86,20 @@ const workspaces = {
     icon: Zap,
     path: "/advocacy",
     color: "atlas-cosmic",
+  },
+  analytics: {
+    title: "Analytics Dashboard",
+    description: "Comprehensive metrics and operational insights",
+    icon: BarChart3,
+    path: "/analytics",
+    color: "atlas-wisdom",
+  },
+  "biblical-foundations": {
+    title: "Biblical Foundations",
+    description: "Kingdom economics built on God's character blueprint",
+    icon: Plus,
+    path: "/biblical-foundations",
+    color: "atlas-gold",
   },
 };
 
@@ -358,6 +374,59 @@ function ImpactProgress() {
   );
 }
 
+function BiblicalFoundationsHighlight() {
+  return (
+    <Card className="border-border bg-gradient-to-br from-atlas-gold/10 to-atlas-cosmic/10">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <Crown className="w-5 h-5 text-atlas-gold" />
+          Kingdom Economics Foundation
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <p className="text-foreground/80 text-sm leading-relaxed">
+          Atlas Sanctum is built on biblical principles of justice, mercy,
+          truth, stewardship, and creation care. Experience finance as God
+          intended.
+        </p>
+
+        <div className="grid grid-cols-2 gap-4 text-xs">
+          <div className="space-y-1">
+            <div className="flex items-center gap-1">
+              <div className="w-1.5 h-1.5 bg-atlas-regenerative rounded-full" />
+              <span className="text-foreground/70">Stewardship Engine</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <div className="w-1.5 h-1.5 bg-atlas-wisdom rounded-full" />
+              <span className="text-foreground/70">Truth & Transparency</span>
+            </div>
+          </div>
+          <div className="space-y-1">
+            <div className="flex items-center gap-1">
+              <div className="w-1.5 h-1.5 bg-atlas-cosmic rounded-full" />
+              <span className="text-foreground/70">Justice Gateway</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <div className="w-1.5 h-1.5 bg-atlas-gold rounded-full" />
+              <span className="text-foreground/70">Reconciliation Engine</span>
+            </div>
+          </div>
+        </div>
+
+        <Link to="/biblical-foundations">
+          <Button
+            size="sm"
+            className="w-full bg-atlas-gold hover:bg-atlas-gold/90 text-atlas-deep"
+          >
+            Explore Biblical Foundations
+            <ArrowRight className="w-3 h-3 ml-2" />
+          </Button>
+        </Link>
+      </CardContent>
+    </Card>
+  );
+}
+
 export default function Dashboard() {
   const { state } = useUser();
 
@@ -490,6 +559,7 @@ export default function Dashboard() {
 
           {/* Sidebar */}
           <div className="space-y-6">
+            <BiblicalFoundationsHighlight />
             <ImpactProgress />
             <RecentActivity />
           </div>

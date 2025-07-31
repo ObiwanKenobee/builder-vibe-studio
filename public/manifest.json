@@ -1,97 +1,169 @@
 {
   "name": "Atlas Sanctum - Regenerative Finance Platform",
   "short_name": "Atlas Sanctum",
-  "description": "Transform capital into conscience and wealth into wisdom through regenerative finance and AI-powered insights.",
-  "start_url": "/",
+  "description": "A global platform for regenerative finance, ethical capital flows, and AI-powered narrative transformation",
+  "theme_color": "#FFD700",
+  "background_color": "#0A0A0F",
   "display": "standalone",
-  "background_color": "#0F0F23",
-  "theme_color": "#D4AF37",
-  "orientation": "any",
+  "orientation": "portrait-primary",
   "scope": "/",
+  "start_url": "/",
+  "id": "atlas-sanctum-app",
   "lang": "en",
   "dir": "ltr",
-  "categories": ["finance", "productivity", "utilities", "business"],
-  "screenshots": [
-    {
-      "src": "/screenshots/desktop-1.jpg",
-      "sizes": "1280x720",
-      "type": "image/jpeg",
-      "platform": "wide",
-      "label": "Atlas Sanctum Dashboard - Desktop View"
-    },
-    {
-      "src": "/screenshots/mobile-1.jpg",
-      "sizes": "390x844",
-      "type": "image/jpeg",
-      "platform": "narrow",
-      "label": "Atlas Sanctum Map - Mobile View"
-    }
-  ],
+  "categories": ["finance", "productivity", "social", "business"],
   "icons": [
     {
-      "src": "/favicon-16x16.png",
-      "sizes": "16x16",
-      "type": "image/png"
+      "src": "/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
     },
     {
-      "src": "/favicon-32x32.png",
-      "sizes": "32x32",
-      "type": "image/png"
+      "src": "/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
     },
     {
-      "src": "/apple-touch-icon.png",
-      "sizes": "180x180",
-      "type": "image/png"
+      "src": "/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable any"
     },
     {
-      "src": "/android-chrome-192x192.png",
+      "src": "/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "maskable any"
     },
     {
-      "src": "/android-chrome-512x512.png",
+      "src": "/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "maskable any"
     }
   ],
   "shortcuts": [
     {
-      "name": "Sanctum Map",
-      "short_name": "Map",
-      "description": "Interactive 3D globe showing regenerative financial flows",
-      "url": "/sanctum-map",
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "description": "View your regenerative finance dashboard",
+      "url": "/dashboard",
       "icons": [
         {
-          "src": "/shortcuts/map-icon.png",
-          "sizes": "96x96"
+          "src": "/icons/dashboard-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
         }
       ]
     },
     {
-      "name": "Pain Transmutation",
-      "short_name": "Transform",
-      "description": "Convert crisis into healing through AI",
-      "url": "/pain-transmutation",
+      "name": "Sanctum Map",
+      "short_name": "Map",
+      "description": "Explore the global regenerative finance map",
+      "url": "/sanctum-map",
       "icons": [
         {
-          "src": "/shortcuts/transform-icon.png",
-          "sizes": "96x96"
+          "src": "/icons/map-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Analytics",
+      "short_name": "Analytics",
+      "description": "View comprehensive platform analytics",
+      "url": "/analytics",
+      "icons": [
+        {
+          "src": "/icons/analytics-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
         }
       ]
     },
     {
       "name": "Fellowship",
-      "short_name": "Connect",
-      "description": "Join regenerative custodians worldwide",
+      "short_name": "Fellowship",
+      "description": "Connect with the regenerative community",
       "url": "/fellowship",
       "icons": [
         {
-          "src": "/shortcuts/fellowship-icon.png",
-          "sizes": "96x96"
+          "src": "/icons/fellowship-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
         }
       ]
+    }
+  ],
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "handle_links": "preferred",
+  "capture_links": "existing-client-navigate",
+  "display_override": ["window-controls-overlay", "minimal-ui", "standalone", "browser"],
+  "protocol_handlers": [
+    {
+      "protocol": "web+atlas",
+      "url": "/handle-protocol?url=%s"
+    }
+  ],
+  "share_target": {
+    "action": "/share",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url",
+      "files": [
+        {
+          "name": "file",
+          "accept": ["image/*", ".pdf", ".csv", ".json"]
+        }
+      ]
+    }
+  },
+  "permissions": [
+    "geolocation",
+    "notifications",
+    "background-sync",
+    "persistent-storage"
+  ],
+  "prefer_related_applications": false,
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.atlassanctum.app",
+      "id": "com.atlassanctum.app"
+    },
+    {
+      "platform": "itunes",
+      "url": "https://apps.apple.com/app/atlas-sanctum/id123456789",
+      "id": "123456789"
     }
   ]
 }

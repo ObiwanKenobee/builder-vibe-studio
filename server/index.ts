@@ -2,6 +2,14 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import { handleDemo } from "./routes/demo";
+import {
+  getBiblicalFoundationsOverview,
+  getStewardshipMetrics,
+  getReconciliationMetrics,
+  getJusticeMetrics,
+  getCreationVoiceMetrics,
+  getTruthTransparencyMetrics
+} from "./routes/biblical-foundations";
 
 export function createServer() {
   const app = express();
@@ -18,6 +26,14 @@ export function createServer() {
   });
 
   app.get("/api/demo", handleDemo);
+
+  // Biblical Foundations API routes
+  app.get("/api/biblical-foundations/overview", getBiblicalFoundationsOverview);
+  app.get("/api/biblical-foundations/stewardship", getStewardshipMetrics);
+  app.get("/api/biblical-foundations/reconciliation", getReconciliationMetrics);
+  app.get("/api/biblical-foundations/justice", getJusticeMetrics);
+  app.get("/api/biblical-foundations/creation-voice", getCreationVoiceMetrics);
+  app.get("/api/biblical-foundations/truth-transparency", getTruthTransparencyMetrics);
 
   return app;
 }

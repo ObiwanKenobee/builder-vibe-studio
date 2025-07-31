@@ -200,7 +200,7 @@ export function getPersonaConfig(persona: PersonaType) {
         "Redirect capital into regenerative, dignity-first investments",
       color: "atlas-gold",
       icon: "👑",
-      workspaces: ["sanctum-map", "dignity-coin", "fellowship", "reports"],
+      workspaces: ["sanctum-map", "dignity-coin", "biblical-foundations", "fellowship", "reports"],
       level: "custodian" as UserLevel,
     },
     creator: {
@@ -208,7 +208,7 @@ export function getPersonaConfig(persona: PersonaType) {
       description: "Share wisdom and co-create narratives for ethical finance",
       color: "atlas-cosmic",
       icon: "🎨",
-      workspaces: ["library", "pain-transmutation", "fellowship", "narratives"],
+      workspaces: ["library", "pain-transmutation", "biblical-foundations", "fellowship", "narratives"],
       level: "steward" as UserLevel,
     },
     regenerator: {
@@ -216,7 +216,7 @@ export function getPersonaConfig(persona: PersonaType) {
       description: "Get visibility and funding for regenerative projects",
       color: "atlas-regenerative",
       icon: "🌱",
-      workspaces: ["sanctum-map", "project-portal", "fellowship", "showcase"],
+      workspaces: ["sanctum-map", "project-portal", "biblical-foundations", "fellowship", "showcase"],
       level: "steward" as UserLevel,
     },
     citizen: {
@@ -227,6 +227,7 @@ export function getPersonaConfig(persona: PersonaType) {
       workspaces: [
         "sanctum-map",
         "pain-transmutation",
+        "biblical-foundations",
         "micro-dashboard",
         "advocacy",
       ],

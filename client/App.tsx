@@ -7,6 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { UserProvider } from "@/contexts/UserContext";
+import { SecurityProvider } from "@/contexts/SecurityContext";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import SanctumMap from "./pages/SanctumMap";
@@ -15,7 +16,10 @@ import DignityCoin from "./pages/DignityCoin";
 import Fellowship from "./pages/Fellowship";
 import Dashboard from "./pages/Dashboard";
 import PainTransmutation from "./pages/PainTransmutation";
+import Analytics from "./pages/Analytics";
+import BiblicalFoundations from "./pages/BiblicalFoundations";
 import { useEffect } from "react";
+import { initializePerformanceOptimizations } from "@/lib/performance";
 
 const queryClient = new QueryClient();
 
@@ -60,18 +64,22 @@ function registerServiceWorker() {
 function AppWithPWA() {
   useEffect(() => {
     registerServiceWorker();
+    initializePerformanceOptimizations();
   }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
-      <UserProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
+      <SecurityProvider>
+        <UserProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Index />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/analytics" element={<Analytics />} />
+              <Route path="/biblical-foundations" element={<BiblicalFoundations />} />
               <Route path="/sanctum-map" element={<SanctumMap />} />
               <Route path="/library" element={<Library />} />
               <Route path="/dignity-coin" element={<DignityCoin />} />
@@ -80,12 +88,13 @@ function AppWithPWA() {
                 path="/pain-transmutation"
                 element={<PainTransmutation />}
               />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-      </UserProvider>
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </TooltipProvider>
+        </UserProvider>
+      </SecurityProvider>
     </QueryClientProvider>
   );
 }
